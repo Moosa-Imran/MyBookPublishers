@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>My Book Publishers - Digital Books Publishers Pakistan</title>
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico">
+    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- StyleSheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="assets/css/theme.min.css" rel="stylesheet" />
+
+  </head>
+
+  <body>
+
+    <main class="main" id="top">
+
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">
+            <img class="me-3 d-inline-block" src="assets/img/gallery/logo.png" height="100px" alt="My Book Publishers Logo" />
+            <span class="text-dark"><b>MyBookPublishers</b></span>
+          </a>
+          <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto pt-2 pt-lg-0 font-base">
+              <li class="nav-item px-2" data-anchor="data-anchor">
+                <a class="nav-link fw-bold active" aria-current="page" href="#home">Books</a>
+              </li>
+              <li class="nav-item px-2" data-anchor="data-anchor">
+                <a class="nav-link fw-bold" href="#aboutus">About Us</a>
+              </li>
+              <li class="nav-item px-2" data-anchor="data-anchor">
+                <a class="nav-link fw-bold" href="#services">Services</a>
+              </li>
+              <li class="nav-item px-2" data-anchor="data-anchor">
+                <a class="nav-link fw-bold" href="#contact">Contact</a>
+              </li>
+            </ul>
+            <form class="ps-lg-5">
+              <!-- <button class="btn btn-link text-danger fw-bold order-1 order-lg-0" type="button">Sign in</button> -->
+              <a class="btn hover-top btn-collab" href="#">Sign In</a>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+        <!-- Hero Section -->
+
+      <section id="home">
+        <div class="container">
+          <div class="row align-items-center g-2">
+            <div class="wow animate__animated animate__fadeInUp col-md-5 col-lg-6 order-0 order-md-1 text-end">
+              <img class="pt-7 pt-md-0 w-100" src="assets/img/gallery/hero-header.gif" alt="hero-header" />
+            </div>
+            <div class="wow animate__animated animate__backInLeft col-md-7 col-lg-6 py-6 text-md-start text-center" data-wow-delay="0.5s">
+              <h6 class="fs-0 text-uppercase fw-bold text-600">Your Trusted Book Publisher</h6>
+              <h1 class="fw-bold fs-4 fs-lg-6 fs-xxl-7 text-primary">Where Creativity <br> Takes Flight</h1>
+              <p class="mb-5 fs-1 fw-medium">Writing a book takes dedication; publishing it should be simple. We’re here to make it easy for you to share your stories, knowledge, and creativity with the world<br class="d-none d-xl-block" />Explore our collection today.</p>
+              <a class="btn hover-top btn-collab" href="#books"><i class="fas fa-book me-2"></i> Explore Books</a>
+              <a class="btn hover-top btn-collab-outline text-gradient ms-2" href="#publish">
+                <i class="fas fa-pen text-danger me-md-2 me-0"></i> Publish Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- <section> begin ============================-->
+        <section class="py-6 bg-soft-warning">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 text-center mb-4">
+                <h6 class="fs-4 text-uppercase fw-bold text-primary">Our Clients</h6>
+              </div>
+              <div class="col-auto col-lg-12 d-lg-flex justify-content-center align-items-center justify-content-lg-between client-logos">
+                <img class="wow animate__animated animate__fadeInUp m-2" src="assets/img/gallery/techJuice.png" height="28" alt="brands" />
+                <img class="wow animate__animated animate__fadeInUp m-2" data-wow-delay="0.5s" src="assets/img/gallery/synergyzer.png" height="30" alt="brands" />
+                <img class="wow animate__animated animate__fadeInUp m-2" data-wow-delay="1s" src="assets/img/gallery/mailbluster.png" height="38" alt="brands" />
+                <img class="wow animate__animated animate__fadeInUp m-2" data-wow-delay="1.5s" src="assets/img/gallery/urdu.png" height="38" alt="brands" />
+                <img class="wow animate__animated animate__fadeInUp m-2" data-wow-delay="2s" src="assets/img/gallery/theme-wagon.png" height="38" alt="brands" />
+              </div>
+            </div>
+          </div>
+          
+          <!-- Media Query for Mobile -->
+          <style>
+            @media (max-width: 576px) {
+              .client-logos {
+                flex-wrap: wrap;  /* Allow wrapping of logos */
+                justify-content: center;  /* Center logos on mobile */
+              }
+        
+              .client-logos img {
+                max-width: 120px;  /* Set a maximum width for logos */
+                width: auto;       /* Use auto width if less than max-width */
+                height: auto;      /* Maintain aspect ratio */
+                margin: 0.5rem;    /* Adjust margin for spacing */
+              }
+            }
+          </style>
+        </section>
+      
+      <!-- ============================================-->
+
+
+
+
+      <!-- <section> begin ============================-->
+        <section id="aboutus" class="py-6">
+          <div class="container">
+            <div class="row flex-center">
+              <div class="wow animate__animated animate__fadeInUp col-md-6 col-lg-5 text-center mb-6 mb-md-0 order-0">
+                <img class="shadow-lg" src="assets/img/gallery/about1.jpeg" height="450" alt="about us image" style="border-radius:3rem; width: 100%;" />
+              </div>
+              <div class="wow animate__animated animate__backInRight col-md-6 col-lg-7 text-center text-md-start mb-6 offset-0" data-wow-delay="0.5s">
+                <h6 class="fs-0 text-uppercase fw-bold text-primary">About Us</h6>
+                <h6 class="fw-bold fs-3 fs-lg-5 lh-sm">Every Book Begins with a Dream</h6>
+                <p class="my-4 fs-1 pe-xl-8">Collaborate with us to bring your stories to life. My Book Publishers offers seamless publishing solutions that connect your work with readers everywhere.</p>
+                <a class="btn hover-top btn-collab" href="#" role="button">Learn more</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="services" class="py-6">
+          <div class="container">
+            <div class="row mb-4">
+              <div class="col-12 text-center">
+                <h6 class="fs-4 text-uppercase fw-bold text-primary">Our Services</h6>
+              </div>
+            </div>
+            <div class="row flex-center">
+
+              <div class="wow animate__animated animate__zoomIn col-md-4 col-lg-3 mt-4 mt-lg-4 text-center text-md-start">
+                <div class="badge bg-soft-danger p-3 rounded-3">
+                  <img class="w-100 h-100" src="assets/img/icons/video2.svg" alt="video icon" />
+                </div>
+                <h4 class="mt-5 mb-3 fw-bold">Digital Books</h4>
+                <p class="fs-1 lh-sm">Transform your physical books with digital assets, including QR codes, to enhance reader engagement and accessibility.</p>
+              </div>
+
+              <div class="wow animate__animated animate__zoomIn col-md-4 col-lg-3 mt-4 mt-lg-4 text-center text-md-start">
+                <div class="badge bg-soft-danger p-3 rounded-3">
+                  <img class="w-100 h-100" src="assets/img/icons/edit.svg" alt="writing icon" />
+                </div>
+                <h4 class="mt-5 mb-3 fw-bold">Craft Your Manuscript</h4>
+                <p class="fs-1 lh-sm">Write your story with care. Every word counts and becomes part of the narrative that resonates with readers.</p>
+              </div>
+              
+              <div class="wow animate__animated animate__zoomIn col-md-4 col-lg-3 mt-4 mt-lg-4 text-center text-md-start">
+                <div class="badge bg-soft-danger p-3 rounded-3">
+                  <img class="w-100 h-100" src="assets/img/icons/monitor.svg" alt="share icon" />
+                </div>
+                <h4 class="mt-5 mb-3 fw-bold">Share with the World</h4>
+                <p class="fs-1 lh-sm">Publish your book and reach global readers, connecting your ideas with the audience it deserves.</p>
+              </div>
+              
+              <div class="wow animate__animated animate__zoomIn col-md-4 col-lg-3 mt-4 mt-lg-4 text-center text-md-start">
+                <div class="badge bg-soft-danger p-3 rounded-3">
+                  <img class="w-100 h-100" src="assets/img/icons/cloud.svg" alt="cloud storage icon" />
+                </div>
+                <h4 class="mt-5 mb-3 fw-bold">Store with Confidence</h4>
+                <p class="fs-1 lh-sm">Securely store your manuscript and related resources in our cloud, ensuring you have access to everything you need, anytime.</p>
+              </div>
+              
+              <div class="wow animate__animated animate__zoomIn col-md-4 col-lg-3 mt-4 mt-lg-4 text-center text-md-start">
+                <div class="badge bg-soft-danger p-3 rounded-3">
+                  <img class="w-100 h-100" src="assets/img/icons/print.svg" alt="printing icon" />
+                </div>
+                <h4 class="mt-5 mb-3 fw-bold">Professional Printing</h4>
+                <p class="fs-1 lh-sm">Get high-quality prints of your book with our professional printing services.</p>
+              </div>
+        
+              <div class="wow animate__animated animate__zoomIn col-md-4 col-lg-3 mt-4 mt-lg-4 text-center text-md-start">
+                <div class="badge bg-soft-danger p-3 rounded-3">
+                  <img class="w-100 h-100" src="assets/img/icons/design.svg" alt="design icon" />
+                </div>
+                <h4 class="mt-5 mb-3 fw-bold">Creative Designing</h4>
+                <p class="fs-1 lh-sm">Let us design a captivating cover and layout that enhances your story's appeal.</p>
+              </div>
+        
+              <div class="wow animate__animated animate__zoomIn col-md-4 col-lg-3 mt-4 mt-lg-4 text-center text-md-start">
+                <div class="badge bg-soft-danger p-3 rounded-3">
+                  <img class="w-100 h-100" src="assets/img/icons/edit.svg" alt="editing icon" />
+                </div>
+                <h4 class="mt-5 mb-3 fw-bold">Expert Editing</h4>
+                <p class="fs-1 lh-sm">Refine your manuscript with our editing services, ensuring clarity and polish.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+      <!-- <section> close ============================-->
+
+      <!-- <section> begin ============================-->
+        <section class="py-6" style="background:linear-gradient(180deg, #FFFEFC -54.51%, #FFF8F0 99.98%);">
+          <div class="container">
+            <div class="row flex-center">
+              <div class="wow animate__animated animate__fadeInUp col-md-6 col-lg-4 text-center mb-6 mb-md-0 order-0 order-md-1">
+                <img class="shadow-collab" src="assets/img/gallery/collab.jpeg" width="400" alt="corroboration image" style="border-radius:3rem;" />
+              </div>
+              <div class="wow animate__animated animate__backInLeft col-md-6 text-center text-md-start mb-6 offset-lg-1" data-wow-delay="0.5s">
+                <h6 class="fs-0 text-uppercase fw-bold text-primary">Collaboration</h6>
+                <h6 class="fw-bold fs-3 fs-lg-5 lh-sm">Bringing Authors, Editors, and Publishers Together</h6>
+                <p class="my-4 fs-1 pe-xl-8">Collaboration is key in the publishing process. My Book Publishers ensures that every member of your team—whether authors, editors, or designers—has access to the resources they need, all in one place.</p>
+                <a class="btn hover-top btn-collab" href="#" role="button">Learn more</a>
+              </div>
+            </div>
+        
+            <div class="row flex-center">
+
+              <div class="wow animate__animated animate__fadeInUp col-md-4 col-lg-3 mt-4 mt-lg-8 text-center text-md-start" data-wow-delay="0.5s">
+                <div class="badge bg-white p-3 rounded-3">
+                  <img class="w-100 h-100" src="assets/img/icons/video.svg" alt="video conferencing icon" />
+                </div>
+                <h4 class="mt-5 mb-3 fw-bold">Digital Books</h4>
+                <p class="fs-1 lh-sm"><span class="text-900">Transform your physical books with digital assets, including QR codes, to enhance reader engagement and accessibility.</span></p>
+              </div>
+        
+              <div class="wow animate__animated animate__fadeInUp col-md-4 col-lg-3 mt-4 mt-lg-8 text-center text-md-start" data-wow-delay="1s">
+                <div class="badge bg-white p-3 rounded-3">
+                  <img class="w-100 h-100" src="assets/img/icons/chat.svg" alt="chat icon" />
+                </div>
+                <h4 class="mt-5 mb-3 fw-bold">Communicate Seamlessly</h4>
+                <p class="fs-1 lh-sm"><span class="text-900">Stay connected with your publishing team to ensure smooth collaboration and workflow.</span></p>
+              </div>
+        
+              <div class="wow animate__animated animate__fadeInUp col-md-4 col-lg-3 mt-4 mt-lg-8 text-center text-md-start" data-wow-delay="1.5s">
+                <div class="badge bg-white p-3 rounded-3">
+                  <img class="w-100 h-100" src="assets/img/icons/image.svg" alt="image sharing icon" />
+                </div>
+                <h4 class="mt-5 mb-3 fw-bold">High-Quality Content Sharing</h4>
+                <p class="fs-1 lh-sm"><span class="text-900">Easily share high-quality images, illustrations, and design assets with the rest of your team for feedback and approvals.</span></p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+      <!-- <section> close ============================-->
+
+      <!-- <section> begin ============================-->
+        <section>
+          <div class="container">
+            <div class="row">
+              <div class="row mb-4">
+                <div class="col-12 text-center">
+                  <h6 class="fs-4 text-uppercase fw-bold text-primary">What Our Clients Says</h6>
+                </div>
+              </div>
+              <div class="wow animate__animated animate__zoomIn col-lg-6 mb-6">
+                <div class="d-flex flex-column flex-sm-row align-items-start">
+                  <img class="me-sm-3 my-2 my-sm-0 align-self-center align-self-sm-start" src="assets/img/gallery/testimonial-1.jpg" width="100" alt="services" />
+                  <img class="me-sm-3 my-2 my-sm-0 align-self-center align-self-sm-start" src="assets/img/icons/quot.svg" alt="quotation icon" />
+                  <div class="flex-1 text-center text-sm-start">
+                    <p class="fs-1 text-1200">“My Book Publishers made the entire publishing process so smooth and efficient. From manuscript to market, their platform delivers outstanding results!”</p>
+                    <h6 class="mb-1 fw-bold fs-0">Ayesha Khan</h6>
+                    <h6 class="fs-0">Author, “Journey to Success”</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="wow animate__animated animate__zoomIn col-lg-6 mb-6">
+                <div class="d-flex flex-column flex-sm-row align-items-start">
+                  <img class="me-sm-3 my-2 my-sm-0 align-self-center align-self-sm-start" src="assets/img/gallery/testimonial-2.jpg" width="100" alt="services" />
+                  <img class="me-sm-3 my-2 my-sm-0 align-self-center align-self-sm-start" src="assets/img/icons/quot.svg" alt="quotation icon" />
+                  <div class="flex-1 text-center text-sm-start">
+                    <p class="fs-1 text-1200">“The publishing tools offered by My Book Publishers allowed us to scale our book releases without a hitch. Truly a game changer!”</p>
+                    <h6 class="mb-1 fw-bold fs-0">Zain Malik</h6>
+                    <h6 class="fs-0">Editor, BrightBooks Publishing</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="wow animate__animated animate__zoomIn col-lg-6 mb-6">
+                <div class="d-flex flex-column flex-sm-row align-items-start">
+                  <img class="me-sm-3 my-2 my-sm-0 align-self-center align-self-sm-start" src="assets/img/gallery/testimonial-3.jpg" width="100" alt="services" />
+                  <img class="me-sm-3 my-2 my-sm-0 align-self-center align-self-sm-start" src="assets/img/icons/quot.svg" alt="quotation icon" />
+                  <div class="flex-1 text-center text-sm-start">
+                    <p class="fs-1 text-1200">“Working with My Book Publishers was a pleasure. Their streamlined system helped us move from concept to print in record time!”</p>
+                    <h6 class="mb-1 fw-bold fs-0">Farooq Ahmed</h6>
+                    <h6 class="fs-0">CEO, NextGen Writers</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="wow animate__animated animate__zoomIn col-lg-6 mb-6">
+                <div class="d-flex flex-column flex-sm-row align-items-start">
+                  <img class="me-sm-3 my-2 my-sm-0 align-self-center align-self-sm-start" src="assets/img/gallery/testimonial-4.jpg" width="100" alt="services" />
+                  <img class="me-sm-3 my-2 my-sm-0 align-self-center align-self-sm-start" src="assets/img/icons/quot.svg" alt="quotation icon" />
+                  <div class="flex-1 text-center text-sm-start">
+                    <p class="fs-1 text-1200">“The support and tools provided by My Book Publishers were crucial in delivering our latest book on time. Highly recommended!”</p>
+                    <h6 class="mb-1 fw-bold fs-0">Sadia Rehman</h6>
+                    <h6 class="fs-0">CTO, Digital Writers Hub</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+      <!-- <section> close ============================-->
+
+      <!-- <section> begin ============================-->
+        <section class="py-md-0 bg-warning-gradient">
+          <div class="container">
+            <div class="row flex-center">
+              <div class="wow animate__animated animate__fadeInUp col-md-6">
+                <img class="w-100 w-lg-75 d-none d-md-block" src="assets/img/gallery/cta.png" width="320" alt="cta" />
+              </div>
+              <div class="col-md-6">
+                <h1 class="fw-bold fs-4 fs-lg-5 fs-l-6 mb-4 text-primary">
+                  Publish Your Book with Us
+                </h1>
+                <a class="animate__animated animate__pulse animate__infinite btn hover-top btn-collab" href="#!">PUBLISH NOW</a>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+      <!-- <section> close ============================-->
+
+      <!-- <section> begin ============================-->
+        <section class="pb-md-10" id="faq">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-md-8 col-lg-6 text-center mb-3">
+                <h6 class="fw-bold fs-4 display-3 lh-sm mb-5">Frequently Asked Questions</h6>
+              </div>
+            </div>
+            <div class="row flex-center">
+              <div class="col-lg-9">
+                <div class="accordion" id="accordionExample">
+                  <div class="accordion-item border-top">
+                    <h2 class="accordion-header" id="heading1">
+                      <button class="accordion-button px-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                        <span class="mb-0 fw-bold text-start fs-1 text-1000">Who can publish with us?</span>
+                      </button>
+                    </h2>
+                    <div class="accordion-collapse collapse show" id="collapse1" aria-labelledby="heading1" data-bs-parent="#accordionExample">
+                      <div class="accordion-body pt-0 px-2">
+                        Anyone with a manuscript, whether you're a new author or an experienced writer, can publish with us. We provide a smooth process for all aspiring writers to turn their work into a professional book.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item border-top">
+                    <h2 class="accordion-header" id="heading2">
+                      <button class="accordion-button px-2 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
+                        <span class="mb-0 fw-bold text-start fs-1 text-1000">How does the publishing process work?</span>
+                      </button>
+                    </h2>
+                    <div class="accordion-collapse collapse" id="collapse2" aria-labelledby="heading2" data-bs-parent="#accordionExample">
+                      <div class="accordion-body pt-0 px-2">
+                        Once you submit your manuscript, our team reviews it and helps you through the steps of editing, designing, and preparing it for publication. You can track each step of the process in real-time through your dashboard.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item border-top">
+                    <h2 class="accordion-header" id="heading3">
+                      <button class="accordion-button px-2 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
+                        <span class="mb-0 fw-bold text-start fs-1 text-1000">Do I retain the rights to my book?</span>
+                      </button>
+                    </h2>
+                    <div class="accordion-collapse collapse" id="collapse3" aria-labelledby="heading3" data-bs-parent="#accordionExample">
+                      <div class="accordion-body pt-0 px-2">
+                        Yes! As an author, you retain full rights to your book. We simply help you bring your work to life through publishing and distribution.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item border-top">
+                    <h2 class="accordion-header" id="heading4">
+                      <button class="accordion-button px-2 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="true" aria-controls="collapse4">
+                        <span class="mb-0 fw-bold text-start fs-1 text-1000">Can I publish both print and digital formats?</span>
+                      </button>
+                    </h2>
+                    <div class="accordion-collapse collapse" id="collapse4" aria-labelledby="heading4" data-bs-parent="#accordionExample">
+                      <div class="accordion-body pt-0 px-2">
+                        Absolutely! You can publish in both print and digital formats to reach a wider audience. We provide professional layouts for both formats to ensure a high-quality product.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item border-top">
+                    <h2 class="accordion-header" id="heading5">
+                      <button class="accordion-button px-2 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="true" aria-controls="collapse5">
+                        <span class="mb-0 fw-bold text-start fs-1 text-1000">What support do I get during the process?</span>
+                      </button>
+                    </h2>
+                    <div class="accordion-collapse collapse" id="collapse5" aria-labelledby="heading5" data-bs-parent="#accordionExample">
+                      <div class="accordion-body pt-0 px-2">
+                        Our team provides full support, from manuscript editing to cover design. You also get access to marketing tools and advice to promote your book successfully.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+      <!-- <section> close ============================-->
+
+
+      <section class="py-md-0">
+        <div class="bg-holder" style="background-image:url(assets/img/gallery/cta-2-bg.png);background-position:center;">
+        </div>
+        <!--/.bg-holder-->
+  
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="wow animate__animated animate__fadeInUp col-md-5 col-lg-3 text-center">
+                    <img class="mt-n8 d-none d-md-block w-100" src="assets/img/gallery/cta-2.png" alt="cta" />
+                </div>
+                <div class="col-md-7 col-lg-8 offset-lg-1">
+                    <h1 class="fw-bold fs-4 fs-lg-6 mb-4 text-white">Start exploring our publishing services today,<br class="d-none d-xxl-block" /> and discover amazing titles</h1>
+                    <a class="pe-2" href="#!"><button class="btn btn-collab">Learn More</button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- <section> begin ============================-->
+    <section>
+        <div class="container">
+            <div class="row flex-center mt-5">
+                <div class="col-lg-6">
+                    <h4 class="fw-bold">For more, Subscribe now</h4>
+                    <p class="fs-1">Stay updated with our latest publications and offers</p>
+                </div>
+                <div class="col-lg-6 d-flex justify-content-lg-end mb-4">
+                    <form class="row row-cols-lg-auto align-items-center">
+                        <div class="col-8 col-sm-9">
+                            <label class="visually-hidden" for="colFormLabel">Email</label>
+                            <div class="input-group">
+                                <input class="form-control" id="colFormLabel" type="email" placeholder="Enter email address" />
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-3 text-end">
+                            <button class="btn btn-collab" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="text-200" />
+            <div class="row justify-content-lg-between circle-blend-right circle-danger">
+                <div class="col-6 col-sm-4 col-lg-auto mb-3">
+                    <h6 class="my-4 fw-bold fs-0">WHY US</h6>
+                    <ul class="list-unstyled mb-md-4 mb-lg-0">
+                        <li class="mb-2"><a class="text-1100 text-decoration-none" href="#!">Quality Content</a></li>
+                        <li class="mb-2"><a class="text-1100 text-decoration-none" href="#!">Expert Guidance</a></li>
+                        <li class="mb-2"><a class="text-1100 text-decoration-none" href="#!">Innovative Solutions</a></li>
+                        <li class="mb-2"><a class="text-1100 text-decoration-none" href="#!">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-auto mb-3">
+                    <h6 class="my-4 fw-bold fs-0">PRODUCTS</h6>
+                    <ul class="list-unstyled mb-md-4 mb-lg-0">
+                        <li class="mb-2"><a class="text-1100 text-decoration-none" href="#!">Books</a></li>
+                        <li class="mb-2"><a class="text-1100 text-decoration-none" href="#!">E-books</a></li>
+                        <li class="mb-2"><a class="text-1100 text-decoration-none" href="#!">Publishing Services</a></li>
+                        <li class="mb-2"><a class="text-1100 text-decoration-none" href="#!">Author Support</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-auto mb-3">
+                    <h6 class="my-4 fw-bold fs-0">RESOURCES</h6>
+                    <ul class="list-unstyled mb-md-4 mb-lg-0">
+                        <li class="mb-2"><a class="text-1100 text-decoration-none" href="#!">Partners</a></li>
+                        <li class="mb-2"><a class="text-1100 text-decoration-none" href="#!">Writers' Resources</a></li>
+                        <li class="mb-2"><a class="text-1100 text-decoration-none" href="#!">FAQs</a></li>
+                        <li class="mb-2"><a class="text-1100 text-decoration-none" href="#!">Blogs</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-auto mb-3">
+                    <h6 class="my-4 fw-bold fs-0">COMPANY</h6>
+                    <ul class="list-unstyled mb-md-4 mb-lg-0">
+                        <li class="mb-2"><a class="text-1100 text-decoration-none" href="#!">About Us</a></li>
+                        <li class="mb-2"><a class="text-1100 text-decoration-none" href="#!">Leadership</a></li>
+                        <li class="mb-2"><a class="text-1100 text-decoration-none" href="#!">Investor Relations</a></li>
+                        <li class="mb-2"><a class="text-1100 text-decoration-none" href="#!">News</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-auto mb-3">
+                    <h6 class="my-4 fw-bold fs-0">PRICING</h6>
+                    <ul class="list-unstyled mb-md-4 mb-lg-0">
+                        <li class="mb-2"><a class="text-1100 text-decoration-none" href="#!">Plans</a></li>
+                        <li class="mb-2"><a class="text-1100 text-decoration-none" href="#!">Packages</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-auto mb-3">
+                    <h6 class="my-4 fw-bold fs-0">FOLLOW</h6>
+                    <ul class="list-unstyled list-inline my-3">
+                        <li class="list-inline-item me-3"><a class="text-decoration-none" href="#!"><img class="list-social-icon" src="assets/img/icons/facebook.svg" alt="" /></a></li>
+                        <li class="list-inline-item me-3"><a class="text-decoration-none" href="#!"><img class="list-social-icon" src="assets/img/icons/twitter.svg" alt="" /></a></li>
+                        <li class="list-inline-item me-3"><a class="text-decoration-none" href="#!"><img class="list-social-icon" src="assets/img/icons/instagram.svg" alt="" /></a></li>
+                        <li class="list-inline-item"><a class="text-decoration-none" href="#!"><img class="list-social-icon" src="assets/img/icons/snapchat.svg" alt="" /></a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="text-200 mb-0" />
+            <div class="row justify-content-md-between justify-content-evenly py-3">
+                <div class="col-12 col-sm-8 col-md-6 col-lg-auto text-center text-md-start">
+                    <p class="fs-0 my-2 text-400">All rights Reserved <span class="fw-bold text-500">&copy; My Book Publisher, 2024</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+      <!-- <section> close ============================-->
+
+    </main>
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
+
+
+    <!--    JavaScripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/is.js/3.1.0/is.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+
+    <script src="assets/js/theme.js"></script>
+    <script>
+      new WOW().init();
+    </script>
+        
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@200;300;400;500;600;700&amp;family=Montserrat:wght@200;300&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@200;300;400;500;600;700&amp;family=Montserrat:wght@200;300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  </body>
+
+</html>
