@@ -83,7 +83,7 @@
             </ul>
             <form class="ps-lg-5">
               <!-- <button class="btn btn-link text-danger fw-bold order-1 order-lg-0" type="button">Sign in</button> -->
-              <a class="btn hover-top btn-collab" href="#">Sign In</a>
+              <a class="btn hover-top btn-collab" href="construction.html">Sign In</a>
             </form>
           </div>
         </div>
@@ -101,7 +101,7 @@
               <h6 class="fs-0 text-uppercase fw-bold text-600">Your Trusted Book Publisher</h6>
               <h1 class="fw-bold fs-4 fs-lg-6 fs-xxl-7 text-primary">Where Creativity <br> Takes Flight</h1>
               <p class="mb-5 fs-1 fw-medium">Writing a book takes dedication; publishing it should be simple. We’re here to make it easy for you to share your stories, knowledge, and creativity with the world<br class="d-none d-xl-block" />Explore our collection today.</p>
-              <a class="btn hover-top btn-collab" href="#books"><i class="fas fa-book me-2"></i> Explore Books</a>
+              <a class="btn hover-top btn-collab" href="construction.html"><i class="fas fa-book me-2"></i> Explore Books</a>
               <a class="btn hover-top btn-collab-outline text-gradient ms-2" href="contact.html">
                 <i class="fas fa-pen text-danger me-md-2 me-0"></i> Publish Now
               </a>
@@ -298,7 +298,7 @@
                   <img class="me-sm-3 my-2 my-sm-0 align-self-center align-self-sm-start" src="assets/img/icons/quot.svg" alt="quotation icon" />
                   <div class="flex-1 text-center text-sm-start">
                     <p class="fs-1 text-1200">“My Book Publishers made the entire publishing process so smooth and efficient. From manuscript to market, their platform delivers outstanding results!”</p>
-                    <h6 class="mb-1 fw-bold fs-0">Ayesha Khan</h6>
+                    <h6 class="mb-1 fw-bold fs-0">Eshaal Bakhtawar</h6>
                     <h6 class="fs-0">Author, “Journey to Success”</h6>
                   </div>
                 </div>
@@ -468,11 +468,11 @@
                     <p class="fs-1">Stay updated with our latest publications and offers</p>
                 </div>
                 <div class="col-lg-6 d-flex justify-content-lg-end mb-4">
-                    <form class="row row-cols-lg-auto align-items-center">
+                    <form id="subscribeForm" class="row row-cols-lg-auto align-items-center">
                         <div class="col-8 col-sm-9">
                             <label class="visually-hidden" for="colFormLabel">Email</label>
                             <div class="input-group">
-                                <input class="form-control" id="colFormLabel" type="email" placeholder="Enter email address" />
+                                <input class="form-control" id="emailInput" type="email" placeholder="Enter email address" required/>
                             </div>
                         </div>
                         <div class="col-4 col-sm-3 text-end">
@@ -615,6 +615,33 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   
+    document.getElementById('subscribeForm').addEventListener('submit', async (e) => {
+        e.preventDefault(); // Prevent the default form submission
+
+        const email = document.getElementById('emailInput').value;
+
+        try {
+            const response = await fetch('/subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert(data.message); // Notify success
+                document.getElementById('subscribeForm').reset(); // Clear the input
+            } else {
+                alert(data.message); // Notify error
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Failed to subscribe. Please try again later.');
+        }
+    });
 });
     </script>
         
