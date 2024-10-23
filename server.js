@@ -19,6 +19,30 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+
+// Session configuration
+app.use(session({
+  secret: process.env.SESSION_SECRET,  
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: mongoUri,                
+    dbName: 'Sessions',                
+    collectionName: 'Customers',       
+    ttl: 4 * 24 * 60 * 60,             
+  }),
+  cookie: { 
+    secure: false,                    
+    httpOnly: true,                   
+    maxAge: 4 * 24 * 60 * 60 * 1000,  
+    sameSite: 'lax',                  
+  }
+}));
+
+
 // MongoDB Connection
 MongoClient.connect(mongoUri)
   .then(client => {

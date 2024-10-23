@@ -1,5 +1,15 @@
 const express = require('express');
+const path = require('path');
 const router = express.Router();
+
+// Protected Route
+function isAuthenticated(req, res, next) {
+    if (req.session.user) {
+        return next(); 
+    } else {
+        return res.redirect('/');
+    }
+}
 
 
 // Route for Storing Email Subscription 
@@ -26,6 +36,76 @@ router.post('/subscribe', async (req, res) => {
         console.error('Error subscribing email:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
+});
+
+// Route for Sign Up
+router.post('/signup', async (req, res) => {
+    const { name, email, password } = req.body;
+    const usersDb = req.app.locals.usersDb;
+
+    try {
+        // Check if the email already exists in the Customers collection
+        const existingUser = await usersDb.collection('Customers').findOne({ email });
+
+        if (existingUser) {
+            return res.status(400).json({ message: 'Email is already registered.' });
+        }
+
+        // Insert new user into the Customers collection
+        await usersDb.collection('Customers').insertOne({
+            name,
+            email,
+            password, 
+            registeredAt: new Date(),
+        });
+
+        res.status(201).json({ message: 'Sign up successful! Welcome to My Book Publishers.' });
+    } catch (error) {
+        console.error('Error during sign-up:', error);
+        res.status(500).json({ message: 'Internal server error.' });
+    }
+});
+
+// Route for Sign In
+router.post('/signin', async (req, res) => {
+    const { email, password } = req.body;
+    const usersDb = req.app.locals.usersDb;
+
+    try {
+        // Find user in the database
+        const user = await usersDb.collection('Customers').findOne({ email });
+
+        // Check if user exists and password matches (this example doesn't use hashed passwords)
+        if (!user || user.password !== password) {
+            return res.status(400).json({ message: 'Invalid Email or Password.' });
+        }
+
+        // Set user data in session
+        req.session.user = {
+            id: user._id,
+            email: user.email,
+            name: user.name
+        };
+
+        res.status(200).json({ message: 'Login successful!', user: req.session.user });
+    } catch (error) {
+        console.error('Error during sign-in:', error);
+        res.status(500).json({ message: 'Internal server error.' });
+    }
+});
+
+router.post('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).json({ message: 'Logout failed. Please try again later.' });
+        }
+        res.clearCookie('connect.sid'); // This clears the session cookie
+        res.status(200).json({ message: 'Logout successful!' });
+    });
+});
+
+router.get('/dashboard', isAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'dashboard.html'));
 });
 
 
