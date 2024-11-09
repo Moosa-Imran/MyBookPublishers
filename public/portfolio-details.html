@@ -167,11 +167,11 @@
 				<div class="bread-inner">
 					<div class="row">
 						<div class="col-12">
-							<h2>Contact Us</h2>
+							<h2>Portfolio Details</h2>
 							<ul class="bread-list">
 								<li><a href="index.html">Home</a></li>
 								<li><i class="icofont-simple-right"></i></li>
-								<li class="active">Contact Us</li>
+								<li class="active">Portfolio Details</li>
 							</ul>
 						</div>
 					</div>
@@ -179,106 +179,48 @@
 			</div>
 		</div>
 		<!-- End Breadcrumbs -->
-				
-		<!-- Start Contact Us -->
-		<section class="contact-us section">
+	
+		<!-- Start Portfolio Details Area -->
+		<section class="pf-details section">
 			<div class="container">
-				<div class="inner">
-					<div class="row"> 
-						<div class="col-lg-6">
-							<div class="contact-us-left">
-								<!--Start Google-map -->
-								<div id="myMap"></div>
-								<!--/End Google-map -->
+				<div class="row">
+					<div class="col-12">
+						<div class="inner-content">
+							<div class="image-slider">
+								<div class="pf-details-slider">
+									<img src="img/call-bg.jpg" alt="#">
+									<img src="img/call-bg.jpg" alt="#">
+									<img src="img/call-bg.jpg" alt="#">
+								</div>
 							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="contact-us-form">
-								<h2>Contact With Us</h2>
-								<p>If you have any questions please fell free to contact with us.</p>
-								<!-- Form -->
-								<form class="form" method="post" action="mail/mail.php">
-									<div class="row">
-										<div class="col-lg-6">
-											<div class="form-group">
-												<input type="text" name="name" placeholder="Name" required="">
-											</div>
-										</div>
-										<div class="col-lg-6">
-											<div class="form-group">
-												<input type="email" name="email" placeholder="Email" required="">
-											</div>
-										</div>
-										<div class="col-lg-6">
-											<div class="form-group">
-												<input type="text" name="phone" placeholder="Phone" required="">
-											</div>
-										</div>
-										<div class="col-lg-6">
-											<div class="form-group">
-												<input type="text" name="subject" placeholder="Subject" required="">
-											</div>
-										</div>
-										<div class="col-lg-12">
-											<div class="form-group">
-												<textarea name="message" placeholder="Your Message" required=""></textarea>
-											</div>
-										</div>
-										<div class="col-12">
-											<div class="form-group login-btn">
-												<button class="btn" type="submit">Send</button>
-											</div>
-											<div class="checkbox">
-												<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox">Do you want to subscribe our Newsletter ?</label>
-											</div>
-										</div>
-									</div>
-								</form>
-								<!--/ End Form -->
+							<div class="date">
+								<ul>
+									<li><span>Category :</span> Heart Surgery</li>
+									<li><span>Date :</span> April 20, 2019</li>
+									<li><span>Client :</span> Suke Agency</li>
+									<li><span>Ags :</span> Typo</li>
+								</ul>
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class="contact-info">
-					<div class="row">
-						<!-- single-info -->
-						<div class="col-lg-4 col-12 ">
-							<div class="single-info">
-								<i class="icofont icofont-ui-call"></i>
-								<div class="content">
-									<h3>+(000) 1234 56789</h3>
-									<p>info@company.com</p>
+							<div class="body-text">
+								<h3>Here is the name of this project here</h3>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor a ti incididunt ut labore et dolore to in magna aliqua. Ut enim ad minim veniam, quis to the in nostrud.abore et dolore magna aliqua uis nostrud.Lorem ipsum dolor sit amet, in a in to in a consectetur.ncididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis to the in nostrud.abore et dolore magna in a aliqua uis nostrud.Lorem ipsum dolor sit amet, in aed do eiusmod</p>
+								<p>ncididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis to the in nostrud.abore et dolore magna to in aliqua uis nostrud.Lorem ipsum dolor sit amet, in aed do eiusmod.ncididunt ut labore et dolore magna aliqua. </p>
+								<p>ncididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis to the in nostrud.abore et dolore magna a aliqua uis nostrud.Lorem ipsum dolor sit amet, in aed do eiusmod.ncididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis to the in nostrud.abore et dolore magna aliqua uis nostrud.Lorem ipsum dolor sit amet, in aed do eiusmod. dolor sit amet, in aed do eiusmod.ncididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis to the in nostrud.abore et dolore magna aliqua uis nostrud.</p>
+								<div class="share">
+									<h4>Share Now -</h4>
+									<ul>
+										<li><a href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
+										<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+										<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+									</ul>
 								</div>
 							</div>
 						</div>
-						<!--/End single-info -->
-						<!-- single-info -->
-						<div class="col-lg-4 col-12 ">
-							<div class="single-info">
-								<i class="icofont-google-map"></i>
-								<div class="content">
-									<h3>2 Fir e Brigade Road</h3>
-									<p>Chittagonj, Lakshmipur</p>
-								</div>
-							</div>
-						</div>
-						<!--/End single-info -->
-						<!-- single-info -->
-						<div class="col-lg-4 col-12 ">
-							<div class="single-info">
-								<i class="icofont icofont-wall-clock"></i>
-								<div class="content">
-									<h3>Mon - Sat: 8am - 5pm</h3>
-									<p>Sunday Closed</p>
-								</div>
-							</div>
-						</div>
-						<!--/End single-info -->
 					</div>
 				</div>
 			</div>
 		</section>
-		<!--/ End Contact Us -->
+		<!-- End Portfolio Details Area -->
 		
 		<!-- Footer Area -->
 		<footer id="footer" class="footer ">
@@ -404,12 +346,6 @@
 		<script src="js/jquery.magnific-popup.min.js"></script>
 		<!-- Counter Up CDN JS -->
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
-		<!-- Google Map API Key JS -->
-		<script src="https://maps.google.com/maps/api/js?key=AIzaSyDGqTyqoPIvYxhn_Sa7ZrK5bENUWhpCo0w"></script>
-		<!-- Gmaps JS -->
-		<script src="js/gmaps.min.js"></script>
-		<!-- Map Active JS -->
-		<script src="js/map-active.js"></script>
 		<!-- Bootstrap JS -->
 		<script src="js/bootstrap.min.js"></script>
 		<!-- Main JS -->

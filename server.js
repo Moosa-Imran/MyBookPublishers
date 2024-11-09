@@ -1,12 +1,14 @@
 const express = require('express');
 const path = require('path');
 const { MongoClient } = require('mongodb');
-const PORT = 3001;
-
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
-const mongoUri = process.env.MONGO_URI;
 
 const app = express();
+const PORT = 3001;
+const mongoUri = process.env.MONGO_URI;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -19,29 +21,24 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
-
 // Session configuration
 app.use(session({
-  secret: process.env.SESSION_SECRET,  
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: mongoUri,                
-    dbName: 'Sessions',                
-    collectionName: 'Customers',       
-    ttl: 4 * 24 * 60 * 60,             
+    mongoUrl: mongoUri,
+    dbName: 'Sessions',
+    collectionName: 'Customers',
+    ttl: 4 * 24 * 60 * 60, // Session TTL
   }),
-  cookie: { 
-    secure: false,                    
-    httpOnly: true,                   
-    maxAge: 4 * 24 * 60 * 60 * 1000,  
-    sameSite: 'lax',                  
+  cookie: {
+    secure: false,
+    httpOnly: true,
+    maxAge: 4 * 24 * 60 * 60 * 1000,
+    sameSite: 'lax',
   }
 }));
-
 
 // MongoDB Connection
 MongoClient.connect(mongoUri)
@@ -62,6 +59,35 @@ MongoClient.connect(mongoUri)
     app.use('/', routes);
   })
   .catch(err => console.error('Could not connect to MongoDB...', err));
+
+// Google Generative AI Setup
+const genAI = new GoogleGenerativeAI({ apiKey: "AIzaSyCWKYbOEAnXoYJA3XiW-VQz_cwNLKOk1Dw" });
+
+// Route to handle chatbot interaction
+app.post('/chat', async (req, res) => {
+  const userMessage = req.body.message;
+  const conversationHistory = req.body.history;
+
+  try {
+    // Get the generative model instance
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.0-pro' });
+
+    // Start chat and pass conversation history
+    const chat = model.startChat({
+      history: conversationHistory,
+    });
+
+    // Send the user's message and get a response
+    const result = await chat.sendMessage(userMessage);
+    const botResponse = result.response.text(); // Get the bot's response text
+
+    // Send the response back to the client
+    res.json({ botMessage: botResponse });
+  } catch (error) {
+    console.error('Error from Generative AI:', error);
+    res.status(500).json({ error: 'Failed to get a response from the chatbot' });
+  }
+});
 
 // Start the server
 app.listen(PORT, () => {

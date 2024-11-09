@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Paper Generation Tool - My Book Publishers</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        #mainContent {
+            transition: margin-left 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md fixed w-full z-10 top-0">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <button id="toggleSidebar" class="lg:hidden text-gray-800 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+
+            <!-- Left Side (Logo) -->
+            <div class="flex items-center">
+                <img src="assets/img/gallery/logo.png" alt="Logo" class="h-10 w-10 rounded-full">
+                <h1 class="ml-3 text-xl font-bold text-gray-800">My Book Publishers</h1>
+            </div>
+
+            <!-- Right Side (Profile Icon) -->
+            <div class="relative">
+                <button class="flex items-center focus:outline-none">
+                    <div class="w-10 h-10 rounded-full bg-gray-300 flex justify-center items-center">
+                        <i class="fas fa-user text-gray-600"></i>
+                    </div>
+                    <span class="ml-2 text-gray-800">John Doe</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="flex pt-16 h-screen">
+        <!-- Sidebar -->
+        <div id="sidebar" class="w-64 h-full bg-white shadow-md hidden lg:block fixed lg:relative">
+            <div class="p-6">
+                <h2 class="text-lg font-bold">Dashboard</h2>
+            </div>
+            <nav class="mt-6">
+                <ul>
+                    <li><a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-200 transition-all"><i class="fas fa-home mr-2"></i> Home</a></li>
+                    <li><a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-200 transition-all"><i class="fas fa-video mr-2"></i> Videos</a></li>
+                    <li><a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-200 transition-all"><i class="fas fa-book mr-2"></i> Tutorials</a></li>
+                    <li><a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-200 transition-all"><i class="fas fa-file-alt mr-2"></i> Notes</a></li>
+                    <li><a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-200 transition-all"><i class="fas fa-question-circle mr-2"></i> Quizzes</a></li>
+                    <li><a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-200 transition-all"><i class="fas fa-file-signature mr-2"></i> Paper Generation</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div id="mainContent" class="flex-1 p-8 bg-gray-100"> 
+            <!-- Paper Generation Tool -->
+            <section class="bg-white shadow-md rounded-md p-6">
+                <h2 class="text-2xl font-semibold mb-4">Generate Custom Papers</h2>
+                <form id="paperForm" class="space-y-4">
+                    <div>
+                        <label for="class" class="block text-gray-700">Class</label>
+                        <select id="class" class="border border-gray-300 rounded p-2 w-full" required>
+                            <option value="">Select Class</option>
+                            <option value="Grade 1">Grade 1</option>
+                            <option value="Grade 2">Grade 2</option>
+                            <option value="Grade 3">Grade 3</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-gray-700">Subject</label>
+                        <select id="subject" class="border border-gray-300 rounded p-2 w-full" required>
+                            <option value="">Select Subject</option>
+                            <option value="Math">Math</option>
+                            <option value="Science">Science</option>
+                            <option value="English">English</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="questionType" class="block text-gray-700">Question Type</label>
+                        <select id="questionType" class="border border-gray-300 rounded p-2 w-full" required>
+                            <option value="">Select Question Type</option>
+                            <option value="MCQs">MCQs</option>
+                            <option value="Short Answers">Short Answers</option>
+                            <option value="Long Answers">Long Answers</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="difficulty" class="block text-gray-700">Difficulty Level</label>
+                        <select id="difficulty" class="border border-gray-300 rounded p-2 w-full" required>
+                            <option value="">Select Difficulty Level</option>
+                            <option value="Easy">Easy</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Hard">Hard</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-all">Generate Paper</button>
+                </form>
+            </section>
+
+            <!-- Display Generated Paper -->
+            <section id="generatedPaper" class="mt-8 hidden">
+                <div class="bg-white shadow-md rounded-md p-6">
+                    <h2 class="text-xl font-semibold mb-4">Generated Paper</h2>
+                    <div id="paperContent" class="text-gray-800"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggleSidebar').addEventListener('click', () => {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            sidebar.classList.toggle('hidden');
+            mainContent.style.marginLeft = sidebar.classList.contains('hidden') ? '0' : '16rem';
+        });
+
+        document.getElementById('paperForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const classSelected = document.getElementById('class').value;
+            const subject = document.getElementById('subject').value;
+            const questionType = document.getElementById('questionType').value;
+            const difficulty = document.getElementById('difficulty').value;
+
+            const paperData = await fetch(`/generate-paper?class=${classSelected}&subject=${subject}&questionType=${questionType}&difficulty=${difficulty}`)
+                .then(response => response.json())
+                .catch(error => {
+                    console.error('Error generating paper:', error);
+                    alert('Failed to generate paper. Please try again.');
+                    return null;
+                });
+
+            if (paperData) {
+                document.getElementById('generatedPaper').classList.remove('hidden');
+                const paperContent = document.getElementById('paperContent');
+                paperContent.innerHTML = '';
+                paperData.questions.forEach((question, index) => {
+                    const questionElement = document.createElement('p');
+                    questionElement.textContent = `${index + 1}. ${question}`;
+                    paperContent.appendChild(questionElement);
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
