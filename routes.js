@@ -99,124 +99,104 @@ router.post('/signin', async (req, res) => {
 
 // Route to generate a PDF paper
 router.get('/generate-paper', async (req, res) => {
-    const questionsDb = req.app.locals.questionsDb; 
+    const questionsDb = req.app.locals.questionsDb;
+    const { schoolName, testName, class: classValue, subject, numberOfQuestions, difficulty } = req.query;
     const doc = new PDFDocument({ margin: 50 });
     const filename = 'Exam_Paper.pdf';
-    const filePath = path.join(__dirname, 'public', 'downloads', filename); // Path to save the generated PDF
+    const filePath = path.join(__dirname, 'public', 'downloads', filename);
 
     try {
-        // Fetch 10 random questions from the MongoDB collection
-        const paperData = await questionsDb.collection('english').aggregate([
-            { $sample: { size: 10 } } // Fetch 10 random documents
+        res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+        res.setHeader('Content-Type', 'application/pdf');
+
+        // Fetch the specified number of questions from the selected subject collection
+        const paperData = await questionsDb.collection(subject).aggregate([
+            { $match: { difficulty } },
+            { $sample: { size: parseInt(numberOfQuestions) } }
         ]).toArray();
 
         if (!paperData.length) {
             return res.status(404).json({ message: 'No data found to generate the paper.' });
         }
 
-        // Pipe the PDF document to a writable stream (save it to file)
         const writeStream = fs.createWriteStream(filePath);
         doc.pipe(writeStream);
 
-        // Add Header Box
-        doc.rect(50, 50, 500, 120) // Adjust height
-            .stroke();
+        // Main Header Box without Shading
+        doc.rect(50, 50, 500, 140).lineWidth(2).stroke();
+        doc.font('Times-Bold').fontSize(20)
+            .text('My Online Prep', 55, 60, { align: 'center', width: 490, underline: true });
 
-        // Add Header Text
-        doc.font('Times-Bold')
-            .fontSize(18)
-            .text('SCHOOL BASED ASSESSMENT 2024-25', 55, 60, { align: 'center', width: 490 });
+        // Test and Grade Details
+        doc.font('Times-Bold').fontSize(14)
+            .text(testName, 55, 95, { align: 'left' })
+            .text(`${classValue} - ${subject.charAt(0).toUpperCase() + subject.slice(1)}`, 400, 95, { align: 'right', width: 140 });
 
-        doc.font('Times-Bold')
-            .fontSize(14)
-            .text('First Term', 60, 90, { align: 'left' });
+        // Description Text
+        doc.font('Times-Roman').fontSize(11)
+            .text('Objective = 10 MCQs (10×1.5=15 Marks)   Time = 1 Hour 30 Minutes',
+                55, 125, { align: 'center', width: 490 });
 
-        doc.text('English Grade 8', 450, 90, { align: 'right' });
+        // School Information
+        doc.font('Times-Bold').fontSize(10)
+            .text(`School Name: ${schoolName}`, 55, 155, { align: 'left', underline: true });
 
-        doc.font('Times-Roman')
-            .fontSize(10)
-            .text(
-                'Objective = 10 MCQs (10×1.5=15 Marks) and Subjective = 35 Marks, Total = 50 Marks / Time = 1 Hour 30 Minutes',
-                55,
-                110,
-                { align: 'center', width: 490 }
-            );
+        // Student Info
+        const yPosition = 175;
+        doc.font('Times-Roman').fontSize(10)
+            .text('Student Name : _____________________ ', 55, yPosition)
+            .text('Roll Number : ___________ ', 250, yPosition)
+            .text('Section : _________', 400, yPosition);
 
-        // Add School Information
-        doc.font('Times-Bold')
-            .fontSize(10)
-            .text('School Name: GGES FAROOQ PURA OLD SHUJABAD ROAD MULTAN (EMIS: 36110088)', 55, 135, {
-                align: 'left',
-                underline: true,
-            });
+        // Separator Line Before Objective Section
+        doc.moveTo(50, 200).lineTo(550, 200).stroke();
 
-        doc.font('Times-Roman')
-            .fontSize(10)
-            .text('Student Name : ___________________________', 55, 155, { align: 'left' });
+        // OBJECTIVE PART Header with Shaded Background
+        doc.rect(50, 205, 500, 20).fillAndStroke("#f0f0f0", "#000");
+        doc.font('Times-Bold').fontSize(12)
+            .fillColor("#000")
+            .text('OBJECTIVE PART (MCQs)', 55, 210, { align: 'center', width: 490 });
 
-        doc.text('Roll Number : ___________________________', 320, 155, { align: 'right' });
+        // Questions
+        let y = 240; // Starting y position for questions
 
-        doc.text('Section : ___________________________', 55, 175, { align: 'left' });
-
-        // Add Divider Line
-        doc.moveTo(50, 185).lineTo(550, 185).stroke();
-
-        // Add Objective Part Title
-        doc.font('Times-Bold')
-            .fontSize(12)
-            .text('OBJECTIVE PART (MCQs)', 55, 195, { align: 'center' });
-
-        // Add Questions
-        let y = 215; // Starting position for questions
         paperData.forEach((item, index) => {
-            // Check if there's enough space for the next question
+            // Check if the current y position exceeds the page height
             if (y > 700) {
-                doc.addPage();
-                y = 50; // Reset y for new page
+                doc.addPage(); // Add a new page
+                y = 50; // Set y position closer to the top for a new page without extra margin
             }
 
-            // Add question number and text
-            doc.font('Times-Roman')
-                .fontSize(11)
+            // Question Text
+            doc.font('Times-Bold').fontSize(11)
                 .text(`Q${index + 1}. ${item.question}`, 55, y, { align: 'left', width: 450 });
+            y += 18; // Move y down for the options
 
-            y += 15; // Adjust y for options
+            // Options with Indentation
+            doc.font('Times-Roman').fontSize(11)
+                .text(`(a) ${item.opta}`, 75, y)
+                .text(`(b) ${item.optb}`, 75, y + 15)
+                .text(`(c) ${item.optc}`, 75, y + 30)
+                .text(`(d) ${item.optd}`, 75, y + 45);
 
-            // Add options
-            doc.text(`(a) ${item.opta}`, 75, y, { continued: false });
-            doc.text(`(b) ${item.optb}`, 75, y + 15, { continued: false });
-            doc.text(`(c) ${item.optc}`, 75, y + 30, { continued: false });
-            doc.text(`(d) ${item.optd}`, 75, y + 45, { continued: false });
-
-            y += 60; // Add spacing after the question
+            y += 60; // Adjust spacing for the next question to control the gap
         });
 
-        // Finalize the PDF and close the stream
         doc.end();
 
-        // Wait for the file to be written before responding with the download
         writeStream.on('finish', () => {
-            // Trigger the file download
             res.download(filePath, filename, (err) => {
                 if (err) {
                     console.error('Error downloading the file:', err);
-                    res.status(500).send('Error generating paper');
+                    res.status(500).send('Error downloading the file');
                 }
-
-                // Optionally, delete the file after it's been sent (to save disk space)
-                fs.unlink(filePath, (err) => {
-                    if (err) {
-                        console.error('Error deleting the temporary file:', err);
-                    }
-                });
             });
         });
     } catch (error) {
-        console.error('Error generating paper:', error);
-        res.status(500).json({ message: 'Internal server error.' });
+        console.error('Error generating PDF paper:', error);
+        res.status(500).send('Error generating PDF paper');
     }
 });
-
 
 
 // Route for LogOut
