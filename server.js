@@ -48,11 +48,13 @@ MongoClient.connect(mongoUri)
     const usersDb = client.db('Users');
     const sessionsDb = client.db('Sessions');
     const subscriptionsDb = client.db('Subscriptions');
+    const questionsDb = client.db('NET');
 
     // Store the database instances in app.locals for access in routes
     app.locals.usersDb = usersDb;
     app.locals.sessionsDb = sessionsDb;
     app.locals.subscriptionsDb = subscriptionsDb;
+    app.locals.questionsDb = questionsDb;
 
     // Import and use the routes
     const routes = require('./routes');

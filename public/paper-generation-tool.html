@@ -24,7 +24,6 @@
             <!-- Left Side (Logo) -->
             <div class="flex items-center">
                 <img src="img/logo.png" alt="Logo" class="h-10">
-                <!-- <h1 class="ml-3 text-xl font-bold text-gray-800">My Book Publishers</h1> -->
             </div>
 
             <!-- Right Side (Profile Icon) -->
@@ -103,17 +102,8 @@
                     <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-all">Generate Paper</button>
                 </form>
             </section>
-
-            <!-- Display Generated Paper -->
-            <section id="generatedPaper" class="mt-8 hidden">
-                <div class="bg-white shadow-md rounded-md p-6">
-                    <h2 class="text-xl font-semibold mb-4">Generated Paper</h2>
-                    <div id="paperContent" class="text-gray-800"></div>
-                </div>
-            </section>
         </div>
     </div>
-
     <script>
         document.getElementById('toggleSidebar').addEventListener('click', () => {
             const sidebar = document.getElementById('sidebar');
@@ -121,34 +111,30 @@
             sidebar.classList.toggle('hidden');
             mainContent.style.marginLeft = sidebar.classList.contains('hidden') ? '0' : '16rem';
         });
-
+    
         document.getElementById('paperForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const classSelected = document.getElementById('class').value;
-            const subject = document.getElementById('subject').value;
-            const questionType = document.getElementById('questionType').value;
-            const difficulty = document.getElementById('difficulty').value;
-
-            const paperData = await fetch(`/generate-paper?class=${classSelected}&subject=${subject}&questionType=${questionType}&difficulty=${difficulty}`)
-                .then(response => response.json())
-                .catch(error => {
-                    console.error('Error generating paper:', error);
-                    alert('Failed to generate paper. Please try again.');
-                    return null;
-                });
-
-            if (paperData) {
-                document.getElementById('generatedPaper').classList.remove('hidden');
-                const paperContent = document.getElementById('paperContent');
-                paperContent.innerHTML = '';
-                paperData.questions.forEach((question, index) => {
-                    const questionElement = document.createElement('p');
-                    questionElement.textContent = `${index + 1}. ${question}`;
-                    paperContent.appendChild(questionElement);
-                });
+    
+            // Initiate PDF generation and download
+            try {
+                const response = await fetch('/generate-paper', { method: 'GET' });
+    
+                if (response.ok) {
+                    // The server sends the file directly, so we don't need to manually handle the blob here.
+                    // The file will be automatically downloaded due to the `res.download()` in the route.
+    
+                    // If you want to perform any additional UI updates or handling, you can do so here.
+                    alert('The paper is being generated and will download soon.');
+                } else {
+                    alert('Failed to generate the paper. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error generating paper:', error);
+                alert('An error occurred. Please try again.');
             }
         });
     </script>
+    
 
 </body>
 </html>
