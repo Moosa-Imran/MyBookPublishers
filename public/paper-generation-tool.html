@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,33 +8,33 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css">
-        <!-- Add KaTeX -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js"></script>
+    <!-- Add KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js"></script>
 
-    
+
     <style>
         #mainContent {
             transition: margin-left 0.3s ease;
         }
-
     </style>
 </head>
+
 <body class="bg-gray-100 font-sans">
-    
+
     <!-- Navbar -->
     <nav class="bg-white shadow-md fixed w-full z-10 top-0">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <button id="toggleSidebar" class="lg:hidden text-gray-800 focus:outline-none">
                 <i class="fas fa-bars text-2xl"></i>
             </button>
-            
+
             <!-- Left Side (Logo) -->
             <div class="flex items-center">
                 <img src="img/logo.png" alt="Logo" class="h-10">
             </div>
-            
+
             <!-- Right Side (Profile Icon) -->
             <div class="relative">
                 <button class="flex items-center focus:outline-none">
@@ -45,7 +46,7 @@
             </div>
         </div>
     </nav>
-    
+
     <!-- Main Container -->
     <div class="flex pt-16 h-screen">
         <!-- Sidebar -->
@@ -56,128 +57,149 @@
             <nav class="mt-6">
                 <ul>
                     <li><a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-200 transition-all">
-                        <i class="fas fa-file-signature mr-2"></i> Generate Paper</a></li>
-                        <li><a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-200 transition-all">
+                            <i class="fas fa-file-signature mr-2"></i> Generate Paper</a></li>
+                    <li><a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-200 transition-all">
                             <i class="fas fa-file-alt mr-2"></i> Generated Papers</a></li>
-                            <li><a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-200 transition-all">
-                                <i class="fas fa-cog mr-2"></i> Paper Settings</a></li>
-                            </ul>
-                        </nav>
+                    <li><a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-200 transition-all">
+                            <i class="fas fa-cog mr-2"></i> Paper Settings</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div id="mainContent" class="flex-1 p-8 bg-gray-100">
+            <!-- Paper Generation Tool -->
+            <section class="bg-white shadow-md rounded-md p-6">
+                <h2 class="text-2xl font-semibold mb-4">Generate Custom Papers</h2>
+                <form id="paperForm" class="space-y-4">
+                    <div>
+                        <label for="schoolName" class="block text-gray-700">School Name</label>
+                        <input type="text" id="schoolName" class="border border-gray-300 rounded p-2 w-full" required>
                     </div>
+                    <div>
+                        <label for="testName" class="block text-gray-700">Test Name</label>
+                        <input type="text" id="testName" class="border border-gray-300 rounded p-2 w-full" required>
+                    </div>
+                    <div>
+                        <label for="class" class="block text-gray-700">Class</label>
+                        <select id="class" class="border border-gray-300 rounded p-2 w-full" required>
+                            <option value="">Select Class</option>
+                            <option value="Grade 1">Grade 1</option>
+                            <option value="Grade 2" disabled>Grade 2</option>
+                            <option value="Grade 3" disabled>Grade 3</option>
+                            <option value="Grade 4" disabled>Grade 4</option>
+                            <option value="Grade 5" disabled>Grade 5</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-gray-700">Subject</label>
+                        <select id="subject" class="border border-gray-300 rounded p-2 w-full" required>
+                            <option value="">Select Subject</option>
+                            <option value="english">English</option>
+                            <option value="science">Science</option>
+                            <option value="maths">Math</option>
+                            <option value="urdu" disabled>Urdu</option>
+                            <option value="social" disabled>Social Srudies</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="Level_1" class="block text-gray-700">Easy MCQs: <span
+                                id="easyValue">0</span></label>
+                        <input type="range" id="Level_1" class="w-full" min="0" max="50" value="0"
+                            oninput="easyValue.textContent = this.value">
+                    </div>
+                    <div>
+                        <label for="Level_2" class="block text-gray-700">Medium MCQs: <span
+                                id="mediumValue">0</span></label>
+                        <input type="range" id="Level_2" class="w-full" min="0" max="50" value="0"
+                            oninput="mediumValue.textContent = this.value">
+                    </div>
+                    <div>
+                        <label for="Level_3" class="block text-gray-700">Hard MCQs: <span
+                                id="hardValue">0</span></label>
+                        <input type="range" id="Level_3" class="w-full" min="0" max="50" value="0"
+                            oninput="hardValue.textContent = this.value">
+                    </div>
+                    <div>
+                        <label for="Level_4" class="block text-gray-700">Entry Test MCQs: <span
+                                id="entryTestValue">0</span></label>
+                        <input type="range" id="Level_4" class="w-full" min="0" max="50" value="0"
+                            oninput="entryTestValue.textContent = this.value">
+                    </div>
+                    <button type="submit"
+                        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-all">Generate
+                        Paper</button>
+                </form>
+            </section>
 
-<!-- Main Content -->
-<div id="mainContent" class="flex-1 p-8 bg-gray-100">
-    <!-- Paper Generation Tool -->
-    <section class="bg-white shadow-md rounded-md p-6">
-        <h2 class="text-2xl font-semibold mb-4">Generate Custom Papers</h2>
-        <form id="paperForm" class="space-y-4">
-            <div>
-                <label for="schoolName" class="block text-gray-700">School Name</label>
-                <input type="text" id="schoolName" class="border border-gray-300 rounded p-2 w-full" required>
+            <!-- Hidden Print Paper Button -->
+            <button id="printPaperButton" onclick="printIframe()"
+                class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-all mt-4"
+                style="display: none;">Print Paper</button>
+
+            <script>
+                function printIframe() {
+                    const iframe = document.getElementById('pdfViewer');
+                    iframe.contentWindow.print();
+                }
+            </script>
+
+            <div class="mt-6">
+                <iframe id="pdfViewer" style="width: 100%; height: 600px; border: none;"></iframe>
             </div>
-            <div>
-                <label for="testName" class="block text-gray-700">Test Name</label>
-                <input type="text" id="testName" class="border border-gray-300 rounded p-2 w-full" required>
-            </div>
-            <div>
-                <label for="class" class="block text-gray-700">Class</label>
-                <select id="class" class="border border-gray-300 rounded p-2 w-full" required>
-                    <option value="">Select Class</option>
-                    <option value="Grade 1">Grade 1</option>
-                    <option value="Grade 2">Grade 2</option>
-                    <option value="Grade 3">Grade 3</option>
-                </select>
-            </div>
-            <div>
-                <label for="subject" class="block text-gray-700">Subject</label>
-                <select id="subject" class="border border-gray-300 rounded p-2 w-full" required>
-                    <option value="">Select Subject</option>
-                    <option value="english">English</option>
-                    <option value="computer">Computer</option>
-                    <option value="maths">Math</option>
-                    <option value="physics">Physics</option>
-                </select>
-            </div>
-            <div>
-                <label for="numberOfQuestions" class="block text-gray-700">Number of Questions</label>
-                <input type="number" id="numberOfQuestions" class="border border-gray-300 rounded p-2 w-full" required min="1">
-            </div>
-            <div>
-                <label for="difficulty" class="block text-gray-700">Difficulty Level</label>
-                <select id="difficulty" class="border border-gray-300 rounded p-2 w-full" required>
-                    <option value="">Select Difficulty Level</option>
-                    <option value="Level_1">Easy</option>
-                    <option value="Level_2">Medium</option>
-                    <option value="Level_3">Hard</option>
-                    <option value="Level_4">Entry Test Lvl</option>
-                </select>
-            </div>
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-all">Generate Paper</button>
-        </form>
-    </section>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-    <!-- Hidden Print Paper Button -->
-    <button id="printPaperButton" onclick="printIframe()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-all mt-4" style="display: none;">Print Paper</button>
-
-    <script>
-        function printIframe() {
-            const iframe = document.getElementById('pdfViewer');
-            iframe.contentWindow.print();
-        }
-    </script>
-
-    <div class="mt-6">
-        <iframe id="pdfViewer" style="width: 100%; height: 600px; border: none;"></iframe>
-    </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
-<script>
-    $(document).ready(function () {
-        // Sidebar toggle functionality
-        $('#toggleSidebar').click(function () {
-            const $sidebar = $('#sidebar');
-            const $mainContent = $('#mainContent');
-            $sidebar.toggleClass('hidden');
-            $mainContent.css('marginLeft', $sidebar.hasClass('hidden') ? '0' : '16rem');
-        });
-
-        // Form submission for generating paper
-        $('#paperForm').submit(async function (e) {
-            e.preventDefault();
-
-            const schoolName = $('#schoolName').val();
-            const testName = $('#testName').val();
-            const classValue = $('#class').val();
-            const subject = $('#subject').val();
-            const numberOfQuestions = $('#numberOfQuestions').val();
-            const difficulty = $('#difficulty').val();
-
-            // Calculate total marks and time based on number of questions
-            const totalMarks = numberOfQuestions; // 1 mark for each MCQ
-            const totalTime = numberOfQuestions; // 1 minute for each MCQ
-
-            try {
-                // Fetch the questions from the server
-                const response = await $.ajax({
-                    url: '/generate-paper',
-                    method: 'GET',
-                    data: {
-                        schoolName: schoolName,
-                        testName: testName,
-                        class: classValue,
-                        subject: subject,
-                        numberOfQuestions: numberOfQuestions,
-                        difficulty: difficulty
-                    }
+        <script>
+            $(document).ready(function () {
+                // Sidebar toggle functionality
+                $('#toggleSidebar').click(function () {
+                    const $sidebar = $('#sidebar');
+                    const $mainContent = $('#mainContent');
+                    $sidebar.toggleClass('hidden');
+                    $mainContent.css('marginLeft', $sidebar.hasClass('hidden') ? '0' : '16rem');
                 });
 
-                if (response && response.questions) {
-                    const questions = response.questions;
+                // Form submission for generating paper
+                $('#paperForm').submit(async function (e) {
+                    e.preventDefault();
 
-                    // Generate HTML content for the paper
-                    let paperContent = ` 
+                    // Collect form data
+                    const schoolName = $('#schoolName').val();
+                    const testName = $('#testName').val();
+                    const classValue = $('#class').val();
+                    const subject = $('#subject').val();
+
+                    // Get the number of questions per difficulty level
+                    const Level_1 = parseInt($('#Level_1').val());
+                    const Level_2 = parseInt($('#Level_2').val());
+                    const Level_3 = parseInt($('#Level_3').val());
+                    const Level_4 = parseInt($('#Level_4').val());
+
+                    // Calculate total marks and time
+                    const numberOfQuestions = Level_1 + Level_2 + Level_3 + Level_4;
+                    const totalMarks = Level_1 + Level_2 + Level_3 + Level_4; // Marks for each question
+                    const totalTime = totalMarks; // 1 minute per question (or adjust accordingly)
+
+                    try {
+                        // Fetch questions from the server based on the difficulty levels
+                        const response = await $.ajax({
+                            url: '/generate-paper',
+                            method: 'GET',
+                            data: {
+                                testName: testName,
+                                class: classValue,
+                                subject: subject,
+                                difficulty: { Level_1, Level_2, Level_3, Level_4 }
+                            }
+                        });
+                        if (response && response.questions) {
+                            const questions = response.questions;
+
+                            // Generate HTML content for the paper
+                            let paperContent = ` 
                         <div style="font-family: Arial, sans-serif; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                             <div style="border: 2px solid #333; padding: 20px; background-color: #fff; border-radius: 10px;">
                                 <h1 style="text-align: center; font-size: 32px; text-decoration: underline; margin-bottom: 20px; color: #0077b6;">
@@ -203,9 +225,9 @@
                                 <div contenteditable="true" style="min-height: 300px; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                     `;
 
-                    // Loop through the questions to add them
-                    $.each(questions, function (index, item) {
-                        paperContent += `
+                            // Loop through the questions to add them
+                            $.each(questions, function (index, item) {
+                                paperContent += `
                             <div style="margin-bottom: 35px; padding: 15px; border-bottom: 2px solid #ddd; background-color: #f7f7f7; border-radius: 8px;">
                                 <p style="font-weight: bold; font-size: 18px; color: #333;">Q${index + 1}. ${item.question}</p>
                                 <div style="padding-left: 25px; font-size: 16px; line-height: 1.6; color: #555;">
@@ -215,62 +237,63 @@
                                     <p>(d) ${item.optd}</p>
                                 </div>
                             </div>`;
-                    });
+                            });
 
-                    paperContent += `</div></div></div>`;  // Closing divs for the editable content
+                            paperContent += `</div></div></div>`;  // Closing divs for the editable content
 
-                    // Load the HTML content into the iframe
-                    const iframe = $('#pdfViewer')[0];
-                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                    iframeDoc.open();
-                    iframeDoc.write(paperContent);
-                    iframeDoc.close();
+                            // Load the HTML content into the iframe
+                            const iframe = $('#pdfViewer')[0];
+                            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                            iframeDoc.open();
+                            iframeDoc.write(paperContent);
+                            iframeDoc.close();
 
-                    // After loading the content, render KaTeX for any math expressions
-                    $(iframeDoc).ready(function () {
-                        // Render KaTeX in the iframe content
-                        renderMathInElement(iframeDoc.body, {
-                            delimiters: [
-                                { left: "$$", right: "$$", display: true },
-                                { left: "\\(", right: "\\)", display: false }
-                            ]
+                            // After loading the content, render KaTeX for any math expressions
+                            $(iframeDoc).ready(function () {
+                                // Render KaTeX in the iframe content
+                                renderMathInElement(iframeDoc.body, {
+                                    delimiters: [
+                                        { left: "$$", right: "$$", display: true },
+                                        { left: "\\(", right: "\\)", display: false }
+                                    ]
+                                });
+                            });
+
+                            // Hide the paper generation form section
+                            $('section.bg-white').hide();
+
+                            // Show the "Print Paper" button
+                            $('#printPaperButton').show();
+
+                            // Success message
+                            iziToast.success({
+                                title: 'Success',
+                                message: 'The paper has been generated and is displayed below.',
+                                position: 'topRight'
+                            });
+                        } else {
+                            // Error message if response or questions are missing
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'Failed to generate the paper. Please try again.',
+                                position: 'topRight'
+                            });
+                        }
+                    } catch (error) {
+                        console.error('Error generating paper:', error);
+                        // Generic error message for any issues
+                        iziToast.error({
+                            title: 'Error',
+                            message: 'An error occurred. Please try again.',
+                            position: 'topRight'
                         });
-                    });
-
-                    // Hide the paper generation form section
-                    $('section.bg-white').hide();
-
-                    // Show the "Print Paper" button
-                    $('#printPaperButton').show();
-
-                    // Success message
-                    iziToast.success({
-                        title: 'Success',
-                        message: 'The paper has been generated and is displayed below.',
-                        position: 'topRight'
-                    });
-                } else {
-                    // Error message if response or questions are missing
-                    iziToast.error({
-                        title: 'Error',
-                        message: 'Failed to generate the paper. Please try again.',
-                        position: 'topRight'
-                    });
-                }
-            } catch (error) {
-                console.error('Error generating paper:', error);
-                // Generic error message for any issues
-                iziToast.error({
-                    title: 'Error',
-                    message: 'An error occurred. Please try again.',
-                    position: 'topRight'
+                    }
                 });
-            }
-        });
-    });
-</script>
+            });
+        </script>
 
 
 
 </body>
+
 </html>

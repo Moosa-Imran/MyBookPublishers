@@ -100,27 +100,56 @@ router.post('/signin', async (req, res) => {
 // Route to generate a paper and send questions as a response
 router.get('/generate-paper', async (req, res) => {
     const questionsDb = req.app.locals.questionsDb;
-    const { subject, numberOfQuestions, difficulty } = req.query;
+    const { subject, difficulty } = req.query;  // difficulty will be an object
+
+    // Extract difficulty levels and their respective counts
+    const { Level_1, Level_2, Level_3, Level_4 } = difficulty;
 
     try {
-        // Fetch the specified number of questions from the selected subject collection
-        const paperData = await questionsDb.collection(subject).aggregate([
-            { $match: { difficulty } },
-            { $sample: { size: parseInt(numberOfQuestions) } }
-        ]).toArray();
+        // Initialize an empty array to hold the fetched questions
+        let allQuestions = [];
 
-        // Check if data was found
-        if (!paperData.length) {
-            return res.status(404).json({ message: 'No data found to generate the paper.' });
+        // Fetch questions for Level_1
+        const level1Questions = await questionsDb.collection(subject).aggregate([
+            { $match: { difficulty: "Level_1" } },
+            { $sample: { size: parseInt(Level_1) } } // Get the number of Level_1 questions
+        ]).toArray();
+        allQuestions = allQuestions.concat(level1Questions); // Add to the main array
+
+        // Fetch questions for Level_2
+        const level2Questions = await questionsDb.collection(subject).aggregate([
+            { $match: { difficulty: "Level_2" } },
+            { $sample: { size: parseInt(Level_2) } } // Get the number of Level_2 questions
+        ]).toArray();
+        allQuestions = allQuestions.concat(level2Questions); // Add to the main array
+
+        // Fetch questions for Level_3
+        const level3Questions = await questionsDb.collection(subject).aggregate([
+            { $match: { difficulty: "Level_3" } },
+            { $sample: { size: parseInt(Level_3) } } // Get the number of Level_3 questions
+        ]).toArray();
+        allQuestions = allQuestions.concat(level3Questions); // Add to the main array
+
+        // Fetch questions for Level_4
+        const level4Questions = await questionsDb.collection(subject).aggregate([
+            { $match: { difficulty: "Level_4" } },
+            { $sample: { size: parseInt(Level_4) } } // Get the number of Level_4 questions
+        ]).toArray();
+        allQuestions = allQuestions.concat(level4Questions); // Add to the main array
+
+        // Check if any questions were fetched
+        if (allQuestions.length === 0) {
+            return res.status(404).json({ message: 'No questions found for the specified parameters.' });
         }
 
-        // Send the questions as a JSON response
-        res.json({ questions: paperData });
+        // Respond with the generated questions
+        res.json({ questions: allQuestions });
     } catch (error) {
         console.error('Error fetching questions:', error);
         res.status(500).send('Error generating paper');
     }
 });
+
 
 
 
