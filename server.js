@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // MongoDB connection
-const mongoUri = 'mongodb://localhost:27017/MyBookPublishers';
+const mongoUri = process.env.MONGO_URI;
 mongoose
     .connect(mongoUri)
     .then(() => console.log('Connected to MongoDB'))
@@ -24,7 +24,7 @@ mongoose
 // Session configuration
 app.use(
     session({
-        secret: process.env.SESSION_SECRET || 'default-secret',
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
         store: MongoStore.create({
@@ -33,7 +33,7 @@ app.use(
             ttl: 4 * 24 * 60 * 60,
         }),
         cookie: {
-            secure: false,
+            secure: true,
             httpOnly: true,
             maxAge: 4 * 24 * 60 * 60 * 1000,
             sameSite: 'lax',
@@ -51,7 +51,7 @@ require('./routes/routes')(app);
 app.use(errorHandler);
 
 // Start server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
