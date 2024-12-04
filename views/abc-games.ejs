@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alphabet Balloon Game</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* General Styles */
+body {
+  margin: 0;
+  font-family: 'Poppins', Arial, sans-serif;
+  text-align: center;
+  background: linear-gradient(to bottom, #cce7ff, #f0f8ff);
+  min-height: 100vh;
+  color: #333;
+}
+
+#game-container {
+  padding: 30px;
+  position: relative;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #FF6F61;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#instruction {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  color: #6B5B95;
+}
+
+/* Music Toggle Button */
+#music-toggle {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background-color: #FF6F61;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 10;
+}
+
+#music-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+#music-toggle:focus {
+  outline: none;
+}
+
+/* Balloon Container */
+#balloon-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 350px;
+  margin: 0 auto;
+  max-width: 700px;
+  position: relative;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Balloon Styles */
+.balloon {
+  height: 120px;
+  width: 100px;
+  border-radius: 50% 50% 45% 45%;
+  position: relative;
+  cursor: pointer;
+  animation: float 4s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.balloon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.balloon:before {
+  content: "";
+  height: 80px;
+  width: 1px;
+  background-color: #1a1a1a;
+  display: block;
+  position: absolute;
+  top: 120px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.balloon:after {
+  content: "▲";
+  text-align: center;
+  display: block;
+  position: absolute;
+  color: var(--after-color, inherit);
+  top: 110px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  margin-top: -5px;
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% { transform: translateY(-10px); }
+  50% { transform: translateY(10px); }
+}
+
+/* Modal Styles */
+#popup-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border: 3px solid #FF6F61;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  display: none;
+  z-index: 1000;
+  max-width: 90vw; /* Set the maximum width to 90% of the viewport width */
+  max-height: 90vh; /* Set the maximum height to 90% of the viewport height */
+  box-sizing: border-box;
+  width: 80vw; /* Default width: 80% of viewport width */
+  height: auto; /* Let height adjust automatically */
+  overflow: auto; /* Allow scrolling if content overflows */
+}
+
+#popup-modal p {
+  margin: 0 0 15px;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+#popup-modal button {
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  background: #FF6F61;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#popup-modal button:hover {
+  background: #FF483A;
+}
+
+/* Overlay */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 999;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  #popup-modal {
+    width: 90vw; /* Make modal width 90% of viewport on smaller screens */
+    max-width: 90vw; /* Ensure it doesn't go beyond 90% width */
+    max-height: 80vh; /* Limit height to 80% of viewport height */
+    padding: 15px;
+  }
+
+  #popup-modal p {
+    font-size: 1.2rem;
+  }
+
+  #popup-modal button {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  #popup-modal {
+    width: 95vw; /* Full width on very small screens */
+    max-width: 95vw;
+    max-height: 70vh; /* Limit height on small screens */
+    padding: 10px;
+  }
+
+  #popup-modal p {
+    font-size: 1rem;
+  }
+
+  #popup-modal button {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+}
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <button id="music-toggle" title="Toggle Music">
+      <i class="fa-solid fa-volume-up"></i>
+    </button>
+    <h1>Alphabet Balloon Game 🎈</h1>
+    <p id="instruction">Pop the balloon with the letter: <span id="target-letter"></span></p>
+    <div id="balloon-container"></div>
+    <audio id="background-music" loop>
+        <source src="sounds/Music.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="buzzer-sound">
+      <source src="sounds/Buzzer.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function () {
+  // ===== Background Music Setup =====
+  const $backgroundMusic = $("#background-music");
+  const $musicToggleButton = $("#music-toggle");
+  const $musicIcon = $musicToggleButton.find("i");
+
+  // Set initial music volume
+  $backgroundMusic.prop("volume", 0.1);
+
+  // Function to play background music
+  function playBackgroundMusic() {
+    $backgroundMusic[0].play().catch(() => {
+      console.log("Autoplay failed. Waiting for user interaction...");
+      $("body").on("click", startMusicOnInteraction);
+    });
+  }
+
+  // Start music after user interaction
+  function startMusicOnInteraction() {
+    $backgroundMusic[0].play().then(() => {
+      $("body").off("click", startMusicOnInteraction);
+    }).catch((error) => {
+      console.error("Failed to play music after interaction:", error);
+    });
+  }
+
+  // Toggle mute/unmute functionality
+  $musicToggleButton.on("click", function () {
+    const isMuted = $backgroundMusic.prop("muted");
+    $backgroundMusic.prop("muted", !isMuted);
+    $musicIcon.toggleClass("fa-volume-up fa-volume-mute");
+  });
+
+  // Play music on page load
+  playBackgroundMusic();
+
+  // ===== Balloon Game Setup =====
+  const $balloonContainer = $("#balloon-container");
+  const $targetLetterElement = $("#target-letter");
+
+  // Modal and overlay elements
+  const $popupModal = $('<div id="popup-modal"><div id="modal-content"></div></div>').appendTo("body");
+  const $overlay = $('<div id="overlay"></div>').appendTo("body");
+
+  // Alphabet limited to A-G
+  const letters = "ABCDEFG";
+  const funFacts = {
+    A: { text: "A is for Apple.", image: "img/A.jpg" },
+    B: { text: "B is for Ball.", image: "img/B.jpg" },
+    C: { text: "C is for Cat.", image: "img/C.jpg" },
+    D: { text: "D is for Dog.", image: "img/D.jpg" },
+    E: { text: "E is for Elephant.", image: "img/E.jpg" },
+    F: { text: "F is for Fish.", image: "img/F.jpg" },
+    G: { text: "G is for Giraffe.", image: "img/G.jpg" },
+  };
+
+  let targetLetter = "";
+  let isSoundPlaying = false;
+
+  // Generate unique colors for balloons
+  function getRandomStyles(usedColors) {
+    const colors = ["#FF6F61", "#6B5B95", "#88B04B", "#F7CAC9", "#92A8D1"];
+    let availableColors = colors.filter((color) => !usedColors.has(color));
+    const randomColor = availableColors[Math.floor(Math.random() * availableColors.length)];
+
+    usedColors.add(randomColor); // Mark color as used
+
+    return {
+      backgroundColor: randomColor,
+      cssText: `
+        background-color: ${randomColor};
+        color: #fff; 
+        box-shadow: inset -7px -3px 10px rgba(0, 0, 0, 0.2);
+      `,
+    };
+  }
+
+  // Start the game
+  function startGame() {
+    targetLetter = letters[Math.floor(Math.random() * letters.length)];
+    $targetLetterElement.text(targetLetter);
+
+    // Play the pronunciation sound for the target letter
+    playLetterSound(targetLetter);
+
+    // Set up a repeated sound every 3 seconds, but only if the previous sound has finished
+    const soundInterval = setInterval(() => {
+      if (!isSoundPlaying) {
+        playLetterSound(targetLetter);
+      }
+    }, 3000); // Play sound every 3000ms (3 seconds)
+
+    $balloonContainer.empty();
+    const options = generateOptions(targetLetter);
+    const usedColors = new Set(); // Track used colors
+
+    options.forEach((letter) => {
+      const { backgroundColor, cssText } = getRandomStyles(usedColors);
+
+      const $balloon = $("<div>")
+        .addClass("balloon")
+        .css("cssText", cssText)
+        .text(letter);
+
+      // Dynamically set the :after arrow color
+      $balloon.css("--after-color", backgroundColor);
+
+      // Balloon click event
+      $balloon.on("click", function () {
+        handleBalloonClick(letter, $balloon);
+
+        // Clear the interval when the game is over or the balloon is clicked
+        clearInterval(soundInterval);
+      });
+
+      $balloonContainer.append($balloon);
+    });
+  }
+
+  // Function to play the pronunciation sound of the letter
+  function playLetterSound(letter) {
+    isSoundPlaying = true;
+    const sound = new Audio(`sounds/${letter}.mp3`);
+
+    sound.play();
+    sound.onended = () => {
+      isSoundPlaying = false; // Sound finished playing, allow next
+    };
+  }
+
+  // Function to play sound for the correct option (A-obj.mp3, B-obj.mp3, etc.)
+  function playCorrectOptionSound(letter) {
+    const sound = new Audio(`sounds/${letter}-obj.mp3`);
+    sound.play();
+  }
+
+  // Generate options for balloons (1 correct + 3 random letters)
+  function generateOptions(correctLetter) {
+    const options = new Set();
+    options.add(correctLetter);
+
+    while (options.size < 4) {
+      const randomLetter = letters[Math.floor(Math.random() * letters.length)];
+      options.add(randomLetter);
+    }
+
+    return Array.from(options).sort(() => Math.random() - 0.5);
+  }
+
+  // Handle balloon click
+  function handleBalloonClick(letter, $balloon) {
+    if (letter === targetLetter) {
+      showPopup(funFacts[letter]);
+    } else {
+      // If wrong letter, change color to red and play buzzer
+      $balloon.css("background-color", "red"); // Change the background color to red
+      playBuzzer(); // Play the buzzer sound
+    }
+  }
+
+  // Function to play the buzzer sound
+  function playBuzzer() {
+    const $buzzerSound = $("#buzzer-sound")[0];
+    $buzzerSound.play(); // Play the buzzer sound
+  }
+
+  // Show the popup modal
+  function showPopup(messageObj) {
+    const { text, image } = messageObj;
+    const modalContent = `
+      <p>${text}</p>
+      ${image ? `<img src="${image}" alt="${text}" style="max-width: 100%; height: auto; margin-top: 15px;">` : ""}
+    `;
+    $("#modal-content").html(modalContent);
+    $popupModal.show();
+    $overlay.show();
+
+    // Play the corresponding sound when the popup is shown
+    playCorrectOptionSound(targetLetter); // Play A-obj.mp3, B-obj.mp3, etc.
+
+    // Automatically close the popup after 3 seconds
+    setTimeout(closePopup, 3000); // Close the popup after 3000ms (3 seconds)
+  }
+
+  // Close the popup modal
+  function closePopup() {
+    $popupModal.hide();
+    $overlay.hide();
+    startGame();
+  }
+
+  // Start the game on page load
+  startGame();
+});
+  </script>
+</body>
+</html>

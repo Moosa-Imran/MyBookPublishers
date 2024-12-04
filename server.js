@@ -1,97 +1,57 @@
 const express = require('express');
-const path = require('path');
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const session = require('express-session');
+const path = require('path');
 const MongoStore = require('connect-mongo');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
+const errorHandler = require('./middlewares/errorHandler'); 
 
 const app = express();
-const PORT = 3001;
-const mongoUri = process.env.MONGO_URI;
 
-// Middleware to parse JSON bodies
-app.use(express.json());
-
-// Serve static files (like HTML, CSS, JS) from the "public" directory
+// Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Default route
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+// MongoDB connection
+const mongoUri = 'mongodb://localhost:27017/MyBookPublishers';
+mongoose
+    .connect(mongoUri)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch((err) => console.log('MongoDB Connection Error:', err));
 
 // Session configuration
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: mongoUri,
-    dbName: 'Sessions',
-    collectionName: 'Customers',
-    ttl: 4 * 24 * 60 * 60, // Session TTL
-  }),
-  cookie: {
-    secure: false,
-    httpOnly: true,
-    maxAge: 4 * 24 * 60 * 60 * 1000,
-    sameSite: 'lax',
-  }
-}));
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET || 'default-secret',
+        resave: false,
+        saveUninitialized: false,
+        store: MongoStore.create({
+            mongoUrl: mongoUri,
+            collectionName: 'Sessions',
+            ttl: 4 * 24 * 60 * 60,
+        }),
+        cookie: {
+            secure: false,
+            httpOnly: true,
+            maxAge: 4 * 24 * 60 * 60 * 1000,
+            sameSite: 'lax',
+        },
+    })
+);
 
-// MongoDB Connection
-MongoClient.connect(mongoUri)
-  .then(client => {
-    console.log('Connected to MongoDB');
-    
-    const usersDb = client.db('Users');
-    const sessionsDb = client.db('Sessions');
-    const subscriptionsDb = client.db('Subscriptions');
-    const questionsDb = client.db('NET');
+// Set view engine (if using EJS templates)
+app.set('view engine', 'ejs');
 
-    // Store the database instances in app.locals for access in routes
-    app.locals.usersDb = usersDb;
-    app.locals.sessionsDb = sessionsDb;
-    app.locals.subscriptionsDb = subscriptionsDb;
-    app.locals.questionsDb = questionsDb;
+// Import routes setup
+require('./routes/routes')(app);
 
-    // Import and use the routes
-    const routes = require('./routes');
-    app.use('/', routes);
-  })
-  .catch(err => console.error('Could not connect to MongoDB...', err));
+// Add error handler middleware here (after routes)
+app.use(errorHandler);
 
-// Google Generative AI Setup
-const genAI = new GoogleGenerativeAI({ apiKey: "AIzaSyCWKYbOEAnXoYJA3XiW-VQz_cwNLKOk1Dw" });
-
-// Route to handle chatbot interaction
-app.post('/chat', async (req, res) => {
-  const userMessage = req.body.message;
-  const conversationHistory = req.body.history;
-
-  try {
-    // Get the generative model instance
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.0-pro' });
-
-    // Start chat and pass conversation history
-    const chat = model.startChat({
-      history: conversationHistory,
-    });
-
-    // Send the user's message and get a response
-    const result = await chat.sendMessage(userMessage);
-    const botResponse = result.response.text(); // Get the bot's response text
-
-    // Send the response back to the client
-    res.json({ botMessage: botResponse });
-  } catch (error) {
-    console.error('Error from Generative AI:', error);
-    res.status(500).json({ error: 'Failed to get a response from the chatbot' });
-  }
-});
-
-// Start the server
+// Start server
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
