@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - My Book Publishers</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        /* Smooth transition for the main content when margin changes */
+        #mainContent {
+            transition: margin-left 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md fixed w-full z-10 top-0">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Hamburger Button (Mobile) -->
+            <button id="toggleSidebar" class="lg:hidden text-gray-800 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+
+            <!-- Left Side (Logo) -->
+            <div class="flex items-center">
+                <img src="assets/img/gallery/logo.png" alt="Logo" class="h-10 w-10 rounded-full">
+                <h1 class="ml-3 text-xl font-bold text-gray-800">My Book Publishers</h1>
+            </div>
+
+            <!-- Right Side (Profile Icon) -->
+            <div class="relative">
+                <button class="flex items-center focus:outline-none">
+                    <div class="w-10 h-10 rounded-full bg-gray-300 flex justify-center items-center">
+                        <i class="fas fa-user text-gray-600"></i>
+                    </div>
+                    <span class="ml-2 text-gray-800">John Doe</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="flex pt-16 h-screen">
+        <!-- Sidebar (hidden on mobile, toggleable) -->
+        <div id="sidebar" class="w-64 h-full bg-white shadow-md hidden lg:block fixed lg:relative">
+            <div class="p-6">
+                <h2 class="text-lg font-bold">Dashboard</h2>
+            </div>
+            <nav class="mt-6">
+                <ul>
+                    <li>
+                        <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-200 transition-all">
+                            <i class="fas fa-home mr-2"></i> Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-200 transition-all">
+                            <i class="fas fa-video mr-2"></i> Videos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-200 transition-all">
+                            <i class="fas fa-book mr-2"></i> Tutorials
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-200 transition-all">
+                            <i class="fas fa-file-alt mr-2"></i> Notes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-200 transition-all">
+                            <i class="fas fa-question-circle mr-2"></i> Quizzes
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div id="mainContent" class="flex-1 p-8 bg-gray-100"> <!-- Removed lg:ml-64 -->
+            <!-- Access Code Form -->
+            <div class="bg-white shadow-md rounded-md p-6">
+                <h2 class="text-2xl font-semibold mb-4">Access Your Book Resources</h2>
+                <p class="text-gray-600 mb-4">Enter the code from your book to access exclusive resources like videos, tutorials, and more.</p>
+                <form id="codeForm" class="flex space-x-3">
+                    <input type="text" id="bookCode" class="border border-gray-300 rounded p-2 w-full" placeholder="Enter your code" required>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-all">Submit</button>
+                </form>
+                <div id="response" class="mt-4 text-green-600"></div>
+            </div>
+
+            <!-- Resources Section -->
+            <div id="resources" class="mt-8 hidden">
+                <div class="bg-white shadow-md rounded-md p-6">
+                    <h2 class="text-2xl font-semibold mb-4">Your Resources</h2>
+                    <ul id="resourceList" class="list-disc pl-5 space-y-2">
+                        <!-- Dynamic content will appear here -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- User Profile Section -->
+            <div class="bg-white shadow-md rounded-md p-6 mt-8">
+                <h2 class="text-2xl font-semibold mb-4">Your Profile</h2>
+                <div class="flex items-center">
+                    <div class="w-16 h-16 rounded-full bg-gray-300 flex justify-center items-center">
+                        <i class="fas fa-user text-gray-600"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-lg font-semibold">John Doe</h3>
+                        <p class="text-gray-600">johndoe@example.com</p>
+                    </div>
+                </div>
+                <button class="mt-4 bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition-all">Edit Profile</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle sidebar on mobile
+        document.getElementById('toggleSidebar').addEventListener('click', () => {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+
+            sidebar.classList.toggle('hidden');
+            if (sidebar.classList.contains('hidden')) {
+                mainContent.style.marginLeft = '0'; // Remove margin when sidebar is hidden
+            } else {
+                mainContent.style.marginLeft = '16rem'; // Add margin when sidebar is visible
+            }
+        });
+
+        // Fetch resources on form submit
+        document.getElementById('codeForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const bookCode = document.getElementById('bookCode').value;
+
+            // Simulate a fetch request to get resources
+            const resources = await fetch(`/get-resources?code=${bookCode}`)
+                .then(response => response.json())
+                .catch(error => {
+                    console.error('Error fetching resources:', error);
+                    alert('Failed to fetch resources.');
+                });
+
+            if (resources && resources.length > 0) {
+                const resourceList = document.getElementById('resourceList');
+                resourceList.innerHTML = ''; // Clear previous entries
+                resources.forEach(resource => {
+                    const li = document.createElement('li');
+                    li.textContent = resource.title; // Assuming each resource has a 'title'
+                    resourceList.appendChild(li);
+                });
+                document.getElementById('resources').classList.remove('hidden'); // Show resources section
+            } else {
+                alert('No resources found for this code.');
+            }
+        });
+    </script>
+
+</body>
+</html>

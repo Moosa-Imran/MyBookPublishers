@@ -1,11 +1,10 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const { MongoClient } = require('mongodb'); // Use MongoDB driver
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const path = require('path');
 const MongoStore = require('connect-mongo');
 require('dotenv').config();
-const errorHandler = require('./middlewares/errorHandler'); 
 
 const app = express();
 
@@ -16,39 +15,60 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // MongoDB connection
 const mongoUri = process.env.MONGO_URI;
-mongoose
-    .connect(mongoUri)
-    .then(() => console.log('Connected to MongoDB'))
-    .catch((err) => console.log('MongoDB Connection Error:', err));
+let db; // Will hold the connected database instance
+let client; // MongoDB client instance
+
+// MongoDB Connection
+MongoClient.connect(mongoUri)
+  .then(client => {
+    console.log('Connected to MongoDB');
+    
+    const usersDb = client.db('Users');
+    const sessionsDb = client.db('Sessions');
+    const subscriptionsDb = client.db('Subscriptions');
+    const questionsDb = client.db('Class_1');
+
+    // Store the database instances in app.locals for access in routes
+    app.locals.usersDb = usersDb;
+    app.locals.sessionsDb = sessionsDb;
+    app.locals.subscriptionsDb = subscriptionsDb;
+    app.locals.questionsDb = questionsDb;
+
+  })
+  .catch(err => console.error('Could not connect to MongoDB...', err));
 
 // Session configuration
-app.use(
-    session({
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: false,
-        store: MongoStore.create({
-            mongoUrl: mongoUri,
-            collectionName: 'Sessions',
-            ttl: 4 * 24 * 60 * 60,
-        }),
-        cookie: {
-            secure: true,
-            httpOnly: true,
-            maxAge: 4 * 24 * 60 * 60 * 1000,
-            sameSite: 'lax',
-        },
-    })
-);
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: mongoUri,
+        dbName: 'Sessions',
+        collectionName: 'Customers',
+        ttl: 4 * 24 * 60 * 60,
+    }),
+    cookie: {
+        secure: false,
+        httpOnly: true,
+        maxAge: 4 * 24 * 60 * 60 * 1000,
+        sameSite: 'lax',
+    }
+}));
+
 
 // Set view engine (if using EJS templates)
 app.set('view engine', 'ejs');
 
-// Import routes setup
-require('./routes/routes')(app);
+// Pass `db` to routes for database interactions
+require('./routes/routes')(app, db); // Pass `db` to routes
 
-// Add error handler middleware here (after routes)
-app.use(errorHandler);
+// Graceful shutdown
+process.on('SIGINT', async () => {
+    console.log('Closing MongoDB connection');
+    await client.close();
+    process.exit(0);
+});
 
 // Start server
 const PORT = process.env.PORT || 3001;

@@ -1,20 +1,22 @@
-const User = require('../models/Admin'); 
-
 // Render login page
 exports.renderLoginPage = (req, res) => {
     if (req.session && req.session.userId) {
-        return res.redirect('/dashboard'); 
+        return res.redirect('/dashboard');
     }
     res.render('login'); // Render login page
 };
 
 // Handle login
 exports.login = async (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
     try {
+        // Access the users database instance from app.locals
+        const usersDb = req.app.locals.usersDb;
+        const userCollection = usersDb.collection('Customers');
+
         // Find the user in the database
-        const user = await User.findOne({ username });
+        const user = await userCollection.findOne({ email });
 
         if (!user) {
             return res.status(401).send('User not found');

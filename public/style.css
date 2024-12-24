@@ -4155,3 +4155,8 @@ body{
 /*=========================
 	End Footer CSS
 ===========================*/
+@media (max-width: 767px) {
+	.topbar {
+		display: none !important;
+	}
+}
