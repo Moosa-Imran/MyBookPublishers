@@ -19,6 +19,34 @@ exports.renderPaperGenerationPage = (req, res) => {
     res.render('paper-generation');
 };
 
+exports.renderEduGames = (req, res) => {
+    res.render('edu-games');
+};
+
+exports.renderAbcTracing = (req, res) => {
+    res.render('abc-tracing');
+};
+
+exports.renderAlphabetGame = (req, res) => {
+    res.render('alphabet-game');
+};
+
+exports.renderObjectsGame = (req, res) => {
+    res.render('objects-game');
+};
+
+exports.renderOrganizeGame = (req, res) => {
+    res.render('organize-game');
+};
+
+exports.renderDrawAlphabetsGame = (req, res) => {
+    res.render('drawAlphabets-game');
+}
+
+exports.renderLetterGame = (req, res) => {
+    res.render('letter-game');
+}
+
 exports.renderAbcGamesPage = (req, res) => {
     res.render('abc-games');
 };

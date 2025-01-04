@@ -9,6 +9,13 @@ router.get('/e-learning', homeController.renderELearningPage);
 router.get('/contact', homeController.renderContactPage);
 router.get('/training', homeController.renderTrainingPage);
 router.get('/paper-generation', homeController.renderPaperGenerationPage);
+router.get('/edu-games', homeController.renderEduGames);
+router.get('/abc-tracing', homeController.renderAbcTracing);
+router.get('/alphabet-game', homeController.renderAlphabetGame);
+router.get('/objects-game', homeController.renderObjectsGame);
+router.get('/organize-game', homeController.renderOrganizeGame);
+router.get('/drawAlphabets-game', homeController.renderDrawAlphabetsGame);
+router.get('/letter-game', homeController.renderLetterGame);
 router.get('/abc-games', homeController.renderAbcGamesPage);
 
 module.exports = router;

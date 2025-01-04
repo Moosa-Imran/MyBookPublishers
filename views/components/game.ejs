@@ -1,0 +1,185 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords"
+        content="Educational Books, e-Learning, Kids Learning, Educational Resources, Online Education">
+    <meta name="description"
+        content="Your Gateway to Educational Excellence. My Book Publishers offers smarter books for smarter minds, with digital learning resources and interactive content for kids and students.">
+    <meta name="copyright" content="My Book Publishers">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>My Book Publishers - Your Gateway to Educational Excellence</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/favicon.png">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+
+    <!-- CSS Libraries (via CDN) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="css/nice-select.css">
+    <!-- icofont CSS -->
+    <link rel="stylesheet" href="css/icofont.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" href="css/slicknav.min.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="css/owl-carousel.css">
+    <!-- Datepicker CSS -->
+    <link rel="stylesheet" href="css/datepicker.css">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+<style>
+    .section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.section-description {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.game-container {
+    border: 3px solid #ddd;
+    border-radius: 10px;
+    background: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.fullscreen-btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.fullscreen-btn:hover {
+    background: #0056b3;
+    color: #fff;
+}
+
+</style>
+</head>
+
+<body>
+
+    <%- include('preloader') %>
+        <header class="header">
+            <%- include('topbar') %>
+                <%- include('inner_header') %>
+        </header>
+
+        <!-- Start Games Section -->
+        <section class="section">
+            <div class="container">
+                <!-- Add Heading and Description -->
+                <div class="text-center mb-4">
+                    <h1 class="section-title"><%= Title %></h1>
+                    <p class="section-description">
+                        <%= Description %>
+                    </p>
+                </div>
+
+                <!-- Responsive Game Frame with Fullscreen Button -->
+                <div class="game-container" style="max-width: 800px; margin: 0 auto;">
+                    <iframe id="gameFrame" src="<%= URL %>" frameborder="0"
+                        style="width: 100%; height: 400px; border-radius: 8px;" allowfullscreen>
+                    </iframe>
+                </div>
+                <!-- Fullscreen Toggle Button -->
+                <div class="text-center mt-3">
+                    <button id="fullscreenToggle" class="btn btn-primary fullscreen-btn">
+                        Fullscreen
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!-- End Games Section -->
+
+        <%- include('footer') %>
+
+
+
+
+
+            <!-- jquery Min JS -->
+            <script src="js/jquery.min.js"></script>
+            <!-- jquery Migrate JS -->
+            <script src="js/jquery-migrate-3.0.0.js"></script>
+            <!-- jquery Ui JS -->
+            <script src="js/jquery-ui.min.js"></script>
+            <!-- Easing JS -->
+            <script src="js/easing.js"></script>
+            <!-- Color JS -->
+            <script src="js/colors.js"></script>
+            <!-- Popper JS -->
+            <script src="js/popper.min.js"></script>
+            <!-- Bootstrap Datepicker JS -->
+            <script src="js/bootstrap-datepicker.js"></script>
+            <!-- Jquery Nav JS -->
+            <script src="js/jquery.nav.js"></script>
+            <!-- Slicknav JS -->
+            <script src="js/slicknav.min.js"></script>
+            <!-- ScrollUp JS -->
+            <script src="js/jquery.scrollUp.min.js"></script>
+            <!-- Niceselect JS -->
+            <script src="js/niceselect.js"></script>
+            <!-- Tilt Jquery JS -->
+            <script src="js/tilt.jquery.min.js"></script>
+            <!-- Owl Carousel JS -->
+            <script src="js/owl-carousel.js"></script>
+            <!-- counterup JS -->
+            <script src="js/jquery.counterup.min.js"></script>
+            <!-- Steller JS -->
+            <script src="js/steller.js"></script>
+            <!-- Wow JS -->
+            <script src="js/wow.min.js"></script>
+            <!-- Magnific Popup JS -->
+            <script src="js/jquery.magnific-popup.min.js"></script>
+            <!-- Counter Up CDN JS -->
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+            <!-- Bootstrap JS -->
+            <script src="js/bootstrap.min.js"></script>
+            <!-- Main JS -->
+            <script src="js/main.js"></script>
+</body>
+<script>
+    document.getElementById('fullscreenToggle').addEventListener('click', function () {
+        const iframe = document.getElementById('gameFrame');
+        if (iframe.requestFullscreen) {
+            iframe.requestFullscreen();
+        } else if (iframe.mozRequestFullScreen) { // Firefox
+            iframe.mozRequestFullScreen();
+        } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari, Opera
+            iframe.webkitRequestFullscreen();
+        } else if (iframe.msRequestFullscreen) { // IE/Edge
+            iframe.msRequestFullscreen();
+        }
+    });
+</script>
+
+
+
+</html>
