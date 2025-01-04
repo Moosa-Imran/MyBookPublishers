@@ -47,6 +47,18 @@ exports.renderLetterGame = (req, res) => {
     res.render('letter-game');
 }
 
+exports.renderMatchCountGame = (req, res) => {
+    res.render('matchCounting-game');
+}
+
+exports.renderHowMany = (req, res) => {
+    res.render('howMany-game');
+}
+
+exports.renderCountingGame = (req, res) => {
+    res.render('counting-game');
+}
+
 exports.renderAbcGamesPage = (req, res) => {
     res.render('abc-games');
 };

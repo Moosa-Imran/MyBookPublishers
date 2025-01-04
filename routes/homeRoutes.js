@@ -16,6 +16,9 @@ router.get('/objects-game', homeController.renderObjectsGame);
 router.get('/organize-game', homeController.renderOrganizeGame);
 router.get('/drawAlphabets-game', homeController.renderDrawAlphabetsGame);
 router.get('/letter-game', homeController.renderLetterGame);
+router.get('/matchCounting-game', homeController.renderMatchCountGame);
+router.get('/howMany-game', homeController.renderHowMany);
+router.get('/counting-game', homeController.renderCountingGame);
 router.get('/abc-games', homeController.renderAbcGamesPage);
 
 module.exports = router;

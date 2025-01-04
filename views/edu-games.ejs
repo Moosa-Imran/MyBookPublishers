@@ -48,6 +48,7 @@
         html {
             scroll-behavior: smooth !important;
         }
+
         .btn {
             color: white !important;
         }
@@ -61,12 +62,14 @@
             <%- include('components/topbar') %>
                 <%- include('components/inner_header') %>
         </header>
-        <%- include('components/breadcrumbs', { backgroundImage: 'img/bread-bg.jpg' , Text: 'Edu-Games' }) %>
-            >
+        <%- include('components/breadcrumbs', { backgroundImage: 'img/edu-games.jpg' , Text: 'Edu-Games' }) %>
+
 
             <!-- Start Games Listing Section -->
             <section class="section">
                 <div class="container">
+                    <!-- English Games Heading -->
+                    <h2 class="text-center mb-4"><strong>English Games</strong></h2>
                     <div class="row">
                         <div class="col-md-6 col-lg-4 mb-4">
                             <div class="card h-100">
@@ -129,8 +132,46 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Horizontal Rule -->
+                    <hr class="my-5">
+                    <!-- Maths Games Heading -->
+                    <h2 class="text-center mb-4"><strong>Maths Games</strong></h2>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <img src="img/games-covers/MatchCountingGame.png" class="card-img-top" alt="ABC Tracing">
+                                <div class="card-body">
+                                    <h5 class="card-title">Match Counting</h5>
+                                    <p class="card-text mb-4">Game where the kids learns maths by matching the numbers with the correct amount of objects.</p>
+                                    <a href="/matchCounting-game" class="btn btn-primary">Play!</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <img src="img/games-covers/HowManyGame.png" class="card-img-top" alt="Alphabet Game">
+                                <div class="card-body">
+                                    <h5 class="card-title">How Many</h5>
+                                    <p class="card-text mb-4">Game where the kids learns to count numbers by clicking on the correct number of objects.</p>
+                                    <a href="/howMany-game" class="btn btn-primary">Play!</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <img src="img/games-covers/CountingGame.png" class="card-img-top" alt="Alphabet Game">
+                                <div class="card-body">
+                                    <h5 class="card-title">Counting Game</h5>
+                                    <p class="card-text mb-4">A simple counting game for kids to learn numbers. The game is designed to help kids learn numbers from 1 to 10. The game is designed to help kids learn numbers from 1 to 10. The game is designed to help kids learn numbers from 1 to 10.</p>
+                                    <a href="/counting-game" class="btn btn-primary">Play!</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </section>
+            
             <!-- End Games Listing Section -->
 
             <%- include('components/footer') %>
