@@ -47,6 +47,10 @@ exports.renderLetterGame = (req, res) => {
     res.render('letter-game');
 }
 
+exports.renderNumberTracingGame = (req, res) => {
+    res.render('number-tracing-game');
+}
+
 exports.renderMatchCountGame = (req, res) => {
     res.render('matchCounting-game');
 }
