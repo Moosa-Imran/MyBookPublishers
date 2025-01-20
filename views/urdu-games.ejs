@@ -57,13 +57,37 @@
 
 <body>
 
-    <%- include('components/reloader') %>
+    <%- include('components/preloader') %>
         <header class="header">
             <%- include('components/topbar') %>
                 <%- include('components/inner_header') %>
         </header>
         <%- include('components/breadcrumbs', { backgroundImage: 'img/edu-games.jpg' , Text: 'Edu-Games' }) %>
 
+
+            <!-- Start Games Listing Section -->
+            <section class="section">
+                <div class="container">
+>
+                    <!-- Maths Games Heading -->
+                    <h2 class="text-center mb-4"><strong>Maths Games</strong></h2>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <img src="img/games-covers/FamilyMatchingGame.png" class="card-img-top" alt="Number Tracing">
+                                <div class="card-body">
+                                    <h5 class="card-title">Family Matching</h5>
+                                    <p class="card-text mb-4">Game where kids learn to match family members</p>
+                                    <a href="/familyMatching-game" class="btn btn-primary">Play!</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            
+            <!-- End Games Listing Section -->
 
             <%- include('components/footer') %>
 

@@ -23,6 +23,7 @@ router.get('/numberTracing-game', homeController.renderNumberTracingGame);
 router.get('/matchCounting-game', homeController.renderMatchCountGame);
 router.get('/howMany-game', homeController.renderHowMany);
 router.get('/counting-game', homeController.renderCountingGame);
+router.get('/familyMatching-game', homeController.renderFamilyMatchingGame);
 router.get('/abc-games', homeController.renderAbcGamesPage);
 
 module.exports = router;

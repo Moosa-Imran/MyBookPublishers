@@ -74,7 +74,11 @@ exports.renderHowMany = (req, res) => {
 exports.renderCountingGame = (req, res) => {
     res.render('counting-game');
 }
+exports.renderFamilyMatchingGame = (req, res) => {
+    res.render('familyMatching-game');
+}
 
 exports.renderAbcGamesPage = (req, res) => {
     res.render('abc-games');
 };
+
