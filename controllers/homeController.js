@@ -23,6 +23,18 @@ exports.renderEduGames = (req, res) => {
     res.render('edu-games');
 };
 
+exports.renderEnglishGames = (req, res) => {
+    res.render('english-games');
+}
+
+exports.renderMathGames = (req, res) => {
+    res.render('math-games');
+};
+
+exports.renderUrduGames = (req, res) => {
+    res.render('urdu-games');
+};
+
 exports.renderAbcTracing = (req, res) => {
     res.render('abc-tracing');
 };

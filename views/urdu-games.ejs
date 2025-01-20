@@ -57,53 +57,13 @@
 
 <body>
 
-    <%- include('components/preloader') %>
+    <%- include('components/reloader') %>
         <header class="header">
             <%- include('components/topbar') %>
                 <%- include('components/inner_header') %>
         </header>
         <%- include('components/breadcrumbs', { backgroundImage: 'img/edu-games.jpg' , Text: 'Edu-Games' }) %>
 
-
-            <!-- Start Games Listing Section -->
-            <section class="section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card h-100">
-                                <img src="img/games-covers/EnglishGames.png" class="card-img-top" alt="English Games">
-                                <div class="card-body">
-                                    <h5 class="card-title">English Games</h5>
-                                    <p class="card-text mb-4">Enhance your English skills with fun and interactive games.</p>
-                                    <a href="/english-games" class="btn btn-primary">View Games</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card h-100">
-                                <img src="img/games-covers/MathGames.png" class="card-img-top" alt="Math Games">
-                                <div class="card-body">
-                                    <h5 class="card-title">Math Games</h5>
-                                    <p class="card-text mb-4">Sharpen your math skills with engaging and educational games.</p>
-                                    <a href="/math-games" class="btn btn-primary">View Games</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card h-100">
-                                <img src="img/games-covers/UrduGames.png" class="card-img-top" alt="Urdu Games">
-                                <div class="card-body">
-                                    <h5 class="card-title">Urdu Games</h5>
-                                    <p class="card-text mb-4">Learn and practice Urdu with interactive and fun games.</p>
-                                    <a href="/urdu-games" class="btn btn-primary">View Games</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- End Games Listing Section -->
 
             <%- include('components/footer') %>
 
