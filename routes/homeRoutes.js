@@ -3,7 +3,7 @@ const router = express.Router();
 const homeController = require('../controllers/homeController');
 
 
-// Route to render login page
+// Route to render pages
 router.get('/', homeController.renderHomePage);
 router.get('/e-learning', homeController.renderELearningPage);
 router.get('/contact', homeController.renderContactPage);
