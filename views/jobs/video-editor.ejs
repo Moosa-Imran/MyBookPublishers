@@ -50,12 +50,12 @@ html {
 	
     <body>
 	
-        <%- include('components/preloader') %>
+        <%- include('../components/preloader') %>
         <header class="header">
-            <%- include('components/topbar') %>
-            <%- include('components/inner_header') %>
+            <%- include('../components/topbar') %>
+            <%- include('../components/inner_header') %>
         </header>
-		<%- include('components/breadcrumbs', { 
+		<%- include('../components/breadcrumbs', { 
 			backgroundImage: '/img/jobs-bread-bg.jpg', 
 			Text: 'Jobs' 
 		}) %>
@@ -111,7 +111,7 @@ html {
 
 
 
-<%- include('components/footer') %>
+<%- include('../components/footer') %>
 
 		
 		<!-- jquery Min JS -->

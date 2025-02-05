@@ -7,10 +7,6 @@ exports.renderELearningPage = (req, res) => {
     res.render('e-learning');
 };
 
-exports.renderContactPage = (req, res) => {
-    res.render('contact');
-};
-
 exports.renderTrainingPage = (req, res) => {
     res.render('training');
 };
